@@ -6,6 +6,7 @@ import com.gobacca.box2d.NinjaUserData;
 public class Ninja extends GameActor
 {
 	private boolean jumping;
+	private boolean hit;
 	
     public Ninja(Body body)
     {
@@ -30,6 +31,17 @@ public class Ninja extends GameActor
     public void landed()
     {
         jumping = false;
+    }
+    
+    public void hit()
+    {
+        body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
+        hit = true;
+    }
+
+    public boolean isHit()
+    {
+        return hit;
     }
 
 }

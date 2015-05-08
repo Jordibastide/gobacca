@@ -4,6 +4,7 @@ public enum UserDataType
 {
 
     GROUND,
-    NINJA
+    NINJA,
+    ENEMY
 
 }

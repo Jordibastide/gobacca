@@ -5,8 +5,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gobacca.box2d.GroundUserData;
-import com.gobacca.box2d.NinjaUserData;
+import com.gobacca.box2d.*;
+import com.gobacca.enums.EnemyType;
 
 public class WorldUtils {
 
@@ -23,7 +23,7 @@ public class WorldUtils {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.GROUND_WIDTH / 2, Constants.GROUND_HEIGHT / 2);
         body.createFixture(shape, Constants.GROUND_DENSITY);
-        body.setUserData(new GroundUserData());
+        body.setUserData(new NinjaUserData(Constants.NINJA_WIDTH, Constants.NINJA_HEIGHT));
         shape.dispose();
         return body;
     }
@@ -43,5 +43,21 @@ public class WorldUtils {
         shape.dispose();
         return body;
     }
-
+    
+    public static Body createEnemy(World world)
+    {
+        EnemyType enemyType = RandomUtils.getRandomEnemyType();
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.position.set(new Vector2(enemyType.getX(), enemyType.getY()));
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(enemyType.getWidth() / 2, enemyType.getHeight() / 2);
+        Body body = world.createBody(bodyDef);
+        body.createFixture(shape, enemyType.getDensity());
+        body.resetMassData();
+        EnemyUserData userData = new EnemyUserData(enemyType.getWidth(), enemyType.getHeight());
+        body.setUserData(userData);
+        shape.dispose();
+        return body;
+    }
 }

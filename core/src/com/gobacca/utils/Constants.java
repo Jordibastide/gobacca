@@ -25,5 +25,14 @@ public class Constants
     public static final float NINJA_GRAVITY_SCALE = 3f;
     public static float NINJA_DENSITY = 0.5f;
     public static final Vector2 NINJA_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
+    public static final float NINJA_HIT_ANGULAR_IMPULSE = 10f;
+    
+    // Enemies
+    public static final float ENEMY_X = 25f;
+    public static final float ENEMY_DENSITY = NINJA_DENSITY;
+    public static final float RUNNING_SHORT_ENEMY_Y = 1.5f;
+    public static final float RUNNING_LONG_ENEMY_Y = 2f;
+    public static final float FLYING_ENEMY_Y = 3f;
+    public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
 
 }

@@ -5,16 +5,19 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.gobacca.stages.GameStage;
 
-public class GameScreen implements Screen {
+public class GameScreen implements Screen
+{
 
     private GameStage stage;
 
-    public GameScreen() {
+    public GameScreen()
+    {
         stage = new GameStage();
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
         //Clear the screen
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
