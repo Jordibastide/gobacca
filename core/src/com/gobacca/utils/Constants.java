@@ -22,6 +22,8 @@ public class Constants
     public static final float NINJA_Y = GROUND_Y + GROUND_HEIGHT;
     public static final float NINJA_WIDTH = 1f;
     public static final float NINJA_HEIGHT = 2f;
+    public static final float NINJA_GRAVITY_SCALE = 3f;
     public static float NINJA_DENSITY = 0.5f;
+    public static final Vector2 NINJA_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
 
 }

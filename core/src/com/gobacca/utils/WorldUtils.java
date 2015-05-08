@@ -5,6 +5,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.gobacca.box2d.GroundUserData;
+import com.gobacca.box2d.NinjaUserData;
 
 public class WorldUtils {
 
@@ -21,11 +23,12 @@ public class WorldUtils {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.GROUND_WIDTH / 2, Constants.GROUND_HEIGHT / 2);
         body.createFixture(shape, Constants.GROUND_DENSITY);
+        body.setUserData(new GroundUserData());
         shape.dispose();
         return body;
     }
     
-    public static Body createRunner(World world)
+    public static Body createNinja(World world)
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -33,8 +36,10 @@ public class WorldUtils {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.NINJA_WIDTH / 2, Constants.NINJA_HEIGHT / 2);
         Body body = world.createBody(bodyDef);
+        body.setGravityScale(Constants.NINJA_GRAVITY_SCALE);
         body.createFixture(shape, Constants.NINJA_DENSITY);
         body.resetMassData();
+        body.setUserData(new NinjaUserData());
         shape.dispose();
         return body;
     }
