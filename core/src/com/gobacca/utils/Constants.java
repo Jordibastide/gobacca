@@ -7,6 +7,7 @@ public class Constants
 	// Screen resolution
     public static final int APP_WIDTH = 960;
     public static final int APP_HEIGHT = 540;
+    public static final float WORLD_TO_SCREEN = 32;
     
     // World specifies
     public static final Vector2 WORLD_GRAVITY = new Vector2(0, -10);
@@ -34,5 +35,8 @@ public class Constants
     public static final float RUNNING_LONG_ENEMY_Y = 2f;
     public static final float FLYING_ENEMY_Y = 3f;
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
-
+    
+    // Textures
+    public static final String BACKGROUND_IMAGE_PATH = "background.png";
+    public static final String GROUND_IMAGE_PATH = "ground.png"; 
 }
