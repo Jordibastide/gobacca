@@ -10,7 +10,7 @@ import com.gobacca.actors.*;
 import com.gobacca.utils.*;
 
 
-public class GameStage extends Stage {
+public class GameStage extends Stage implements ContactListener {
 
     // This will be our viewport measurements while working with the debug renderer
     private static final int VIEWPORT_WIDTH = 20;
