@@ -16,6 +16,7 @@ public class BodyUtils
 			case NINJA:
 			case ENEMY:
 				return body.getPosition().x + userData.getWidth() / 2 > 0;
+			case GROUND:
 		}
 		
 		return true;

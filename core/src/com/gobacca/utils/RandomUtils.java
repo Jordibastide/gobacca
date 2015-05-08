@@ -12,7 +12,7 @@ public class RandomUtils
         return randomEnum.random();
     }
 
-    private static class RandomEnum<E extends Enum>
+    private static class RandomEnum<E extends Enum<?>>
     {
     	private static final Random RND = new Random();
         private final E[] values;
