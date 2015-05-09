@@ -69,7 +69,7 @@ public class Ninja extends GameActor
     
     public void jump()
     {
-        if (!jumping)
+        if (!(jumping))
         {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
             jumping = true;

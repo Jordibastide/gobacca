@@ -10,12 +10,14 @@ public class NinjaUserData extends UserData
     private Vector2 jumpingLinearImpulse;
 
     // CONSTRUCTORS
+    /*
     public NinjaUserData()
     {
         super();
         jumpingLinearImpulse = Constants.NINJA_JUMPING_LINEAR_IMPULSE;
         userDataType = UserDataType.NINJA;
     }
+    */
     
     public NinjaUserData(float width, float height)
     {

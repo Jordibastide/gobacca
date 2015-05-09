@@ -28,7 +28,7 @@ public class GameStage extends Stage implements ContactListener
     private float accumulator = 0f;
 
     private OrthographicCamera camera;
-    private Box2DDebugRenderer renderer;
+    // private Box2DDebugRenderer renderer;
     
     private Rectangle screenRightSide;
 
@@ -40,7 +40,7 @@ public class GameStage extends Stage implements ContactListener
         initWorld();
         initCamera();
         initTouchControlAreas();
-        renderer = new Box2DDebugRenderer();
+        // renderer = new Box2DDebugRenderer();
     }
 
     private void initWorld()

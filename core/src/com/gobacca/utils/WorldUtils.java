@@ -39,7 +39,7 @@ public class WorldUtils {
         body.setGravityScale(Constants.NINJA_GRAVITY_SCALE);
         body.createFixture(shape, Constants.NINJA_DENSITY);
         body.resetMassData();
-        body.setUserData(new NinjaUserData());
+        body.setUserData(new NinjaUserData(Constants.NINJA_WIDTH, Constants.NINJA_HEIGHT));
         shape.dispose();
         return body;
     }
