@@ -12,20 +12,17 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.*;
 import com.gobacca.utils.*;
 
-
 public class GameStage extends Stage implements ContactListener
 {
-
-    // This will be our viewport measurements while working with the debug renderer
-	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
+	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;		// This will be our viewport measurements while working with the debug renderer
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
+    
+    private final float TIME_STEP = 1 / 300f;
+    private float accumulator = 0f;
 
     private World world;
     private Ground ground;
     private Ninja ninja;
-
-    private final float TIME_STEP = 1 / 300f;
-    private float accumulator = 0f;
 
     private OrthographicCamera camera;
     // private Box2DDebugRenderer renderer;
@@ -80,8 +77,7 @@ public class GameStage extends Stage implements ContactListener
     private void initTouchControlAreas()
     {
         touchPoint = new Vector3();
-        screenRightSide = new Rectangle(getCamera().viewportWidth / 2, 0, getCamera().viewportWidth / 2,
-                getCamera().viewportHeight);
+        screenRightSide = new Rectangle(getCamera().viewportWidth / 2, 0, getCamera().viewportWidth / 2, getCamera().viewportHeight);
         Gdx.input.setInputProcessor(this);
     }
 
@@ -100,7 +96,8 @@ public class GameStage extends Stage implements ContactListener
         // Fix timestep
         accumulator += delta;
 
-        while (accumulator >= delta) {
+        while (accumulator >= delta)
+        {
             world.step(TIME_STEP, 6, 2);
             accumulator -= TIME_STEP;
         }

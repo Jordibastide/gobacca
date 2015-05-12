@@ -7,7 +7,6 @@ import com.gobacca.stages.GameStage;
 
 public class GameScreen implements Screen
 {
-
     private GameStage stage;
 
     public GameScreen()

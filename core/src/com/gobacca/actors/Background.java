@@ -21,6 +21,15 @@ public class Background extends Actor
         textureRegionBounds1 = new Rectangle(0 - Constants.APP_WIDTH / 2, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
         textureRegionBounds2 = new Rectangle(Constants.APP_WIDTH / 2, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
     }
+    
+    public Background(String img_path, float x_bounds_1, float y_bounds_1, float x_bounds_2, float y_bounds_2, int s)
+    {
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal(img_path)));
+        textureRegionBounds1 = new Rectangle(x_bounds_1, y_bounds_1, x_bounds_2, y_bounds_2);
+        textureRegionBounds2 = new Rectangle(x_bounds_1, y_bounds_1, x_bounds_2, y_bounds_2);
+        
+        speed = s;
+    }
 
     @Override
     public void act(float delta)

@@ -54,5 +54,8 @@ public class Constants
     public static final String[] RUNNING_WIDE_ENEMY_REGION_NAMES = new String[] {"worm_walk1", "worm_walk2"};
     public static final String[] FLYING_SMALL_ENEMY_REGION_NAMES = new String[] {"bee_fly1", "bee_fly2"};
     public static final String[] FLYING_WIDE_ENEMY_REGION_NAMES = new String[] {"fly_fly1", "fly_fly2"};
-
+    
+    // Menu
+    public static final String START_BUTTON_IMAGE_PATH = "start-button.jpg";
+    public static final String MENU_BACKGROUND_IMAGE_PATH = "bg_menu.png";
 }
