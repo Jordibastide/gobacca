@@ -18,6 +18,31 @@ public class GameScreen implements Screen
     	game = g;
         stage = new GameStage(this);
     }
+    
+    public boolean isMusicON()
+    {
+    	return game.isMusicON();
+    }
+    
+    public boolean isSoundON()
+    {
+    	return game.isSoundON();
+    }
+    
+    public void setMusicState(boolean state)
+    {
+    	game.setMusicState(state);
+    }
+    
+    public void setSoundState(boolean state)
+    {
+    	game.setSoundState(state);
+    }
+    
+    public void setMainMenuStage()
+    {
+    	 game.setMenuScreen(MenuType.MAIN);
+    }
 
     @Override
     public void render(float delta)

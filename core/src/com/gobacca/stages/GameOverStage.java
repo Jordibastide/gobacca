@@ -18,7 +18,8 @@ public class GameOverStage extends Stage
     
     private MenuScreen screen;
     
-    private Button start_button;
+    private static final int NB_BUTTONS = 4;
+    private Button[] buttons;
     private Vector3 touchPoint;
     
     public GameOverStage(MenuScreen s)
@@ -41,8 +42,21 @@ public class GameOverStage extends Stage
     
     private void initButtons()
     {
-    	start_button = new Button(Constants.MENU_BUTTON_IMAGE_PATH, VIEWPORT_WIDTH / 2, VIEWPORT_HEIGHT / 2, 100, 100);
-        addActor(start_button);
+    	buttons = new Button[NB_BUTTONS];
+    	
+    	buttons[0] = new Button(Constants.RETRY_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH / 2) - (Constants.ICON_SIZE_PX / 2), (VIEWPORT_HEIGHT / 2) - (Constants.ICON_SIZE_PX / 2), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[3] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+        
+    	if(!screen.isMusicON())
+			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
+
+		if(!screen.isSoundON())
+			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
+		
+    	for(int i = 0; i < NB_BUTTONS; ++i)
+    		addActor(buttons[i]);
     }
     
     private void translateScreenToWorldCoordinates(int x, int y)
@@ -54,13 +68,51 @@ public class GameOverStage extends Stage
     public boolean touchDown(int x, int y, int pointer, int button)
     {
         translateScreenToWorldCoordinates(x, y);
-
-        if (start_button.contains(touchPoint.x, touchPoint.y))
+        
+        int i = 0;
+        while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
+        	++i;
+        
+        switch(i)
         {
-        	System.out.println("GO !\n");
-            screen.setMainMenuStage();
+        	case 0:
+        		screen.launchGame();
+        	break;
+        	
+        	case 1:
+        		if(screen.isMusicON())
+        		{
+        			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
+        			screen.setMusicState(false);
+        		}
+        		else
+        		{
+        			buttons[1].setTexture(Constants.MUSIC_1_BUTTON_IMAGE_PATH);
+        			screen.setMusicState(true);
+        		}
+        	break;
+        	
+        	case 2:
+        		if(screen.isSoundON())
+        		{
+        			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
+        			screen.setSoundState(false);
+        		}
+        		else
+        		{
+        			buttons[2].setTexture(Constants.SOUND_1_BUTTON_IMAGE_PATH);
+        			screen.setSoundState(true);
+        		}
+        	break;
+        	
+        	case 3:
+        		screen.setMainMenuStage();
+        	break;
+        	
+        	default:
+        	break;
         }
-
+        
         return super.touchDown(x, y, pointer, button);
     }
 }

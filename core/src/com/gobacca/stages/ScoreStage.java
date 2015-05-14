@@ -8,22 +8,21 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
-import com.gobacca.enums.MenuType;
 import com.gobacca.screens.MenuScreen;
 import com.gobacca.utils.Constants;
 
-public class MenuStage extends Stage 
+public class ScoreStage extends Stage 
 {
 	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
     
     private MenuScreen screen;
     
-    private static final int NB_BUTTONS = 5;
+    private static final int NB_BUTTONS = 3;
     private Button[] buttons;
     private Vector3 touchPoint;
     
-    public MenuStage(MenuScreen s)
+    public ScoreStage(MenuScreen s)
     {
     	super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
     	
@@ -38,25 +37,23 @@ public class MenuStage extends Stage
     
     private void initBackground()
     {
-        addActor(new Background(Constants.MENU_BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 0));
+        addActor(new Background(Constants.SCORE_BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 0));
     }
     
     private void initButtons()
     {
     	buttons = new Button[NB_BUTTONS];
     	
-    	buttons[0] = new Button(Constants.PLAY_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH / 2) - (Constants.ICON_SIZE_PX / 2), (VIEWPORT_HEIGHT / 2) - (Constants.ICON_SIZE_PX / 2), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[0] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
     	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
     	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[3] = new Button(Constants.SCORE_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[4] = new Button(Constants.INFO_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), 10, Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	
-		if(!screen.isMusicON())
+        
+    	if(!screen.isMusicON())
 			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
 
 		if(!screen.isSoundON())
 			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
-        
+		
     	for(int i = 0; i < NB_BUTTONS; ++i)
     		addActor(buttons[i]);
     }
@@ -78,7 +75,7 @@ public class MenuStage extends Stage
         switch(i)
         {
         	case 0:
-        		screen.launchGame();
+        		screen.setMainMenuStage();
         	break;
         	
         	case 1:
@@ -107,18 +104,10 @@ public class MenuStage extends Stage
         		}
         	break;
         	
-        	case 3:
-        		screen.setStage(MenuType.SCORE);
-        	break;
-        	
-        	case 4:
-        		screen.setStage(MenuType.INFO);
-        	break;
-        		
         	default:
         	break;
         }
-
+        
         return super.touchDown(x, y, pointer, button);
     }
 }

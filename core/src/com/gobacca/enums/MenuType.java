@@ -3,5 +3,7 @@ package com.gobacca.enums;
 public enum MenuType
 {
     MAIN,
-    GAME_OVER
+    GAME_OVER,
+    INFO,
+    SCORE
 }

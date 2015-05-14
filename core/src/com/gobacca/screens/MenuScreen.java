@@ -26,11 +26,39 @@ public class MenuScreen implements Screen
     		case GAME_OVER:
     			setGameOverStage();
     		break;
+    		
+    		case INFO:
+    			setInfoStage();
+    		break;
+    		
+    		case SCORE:
+    			setScoreStage();
+    		break;
     			
     		default:
     			setMainMenuStage();
     		break;
     	}
+    }
+    
+    public boolean isMusicON()
+    {
+    	return game.isMusicON();
+    }
+    
+    public boolean isSoundON()
+    {
+    	return game.isSoundON();
+    }
+    
+    public void setMusicState(boolean state)
+    {
+    	game.setMusicState(state);
+    }
+    
+    public void setSoundState(boolean state)
+    {
+    	game.setSoundState(state);
     }
     
     public void setGameOverStage()
@@ -41,6 +69,16 @@ public class MenuScreen implements Screen
     public void setMainMenuStage()
     {
     	 stage = new MenuStage(this);
+    }
+    
+    public void setInfoStage()
+    {
+    	 stage = new InfoStage(this);
+    }
+    
+    public void setScoreStage()
+    {
+    	 stage = new ScoreStage(this);
     }
     
     public void launchGame()
