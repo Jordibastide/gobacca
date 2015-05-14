@@ -3,14 +3,18 @@ package com.gobacca.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.gobacca.stages.GameStage;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.gobacca.game.GobaccaGame;
+import com.gobacca.stages.*;
 
 public class GameScreen implements Screen
 {
-    private GameStage stage;
+	private GobaccaGame game;
+    private Stage stage;
 
-    public GameScreen()
+    public GameScreen(GobaccaGame g)
     {
+    	game = g;
         stage = new GameStage();
     }
 
@@ -40,7 +44,7 @@ public class GameScreen implements Screen
     @Override
     public void hide()
     {
-
+    	stage.dispose();
     }
 
     @Override
@@ -58,7 +62,7 @@ public class GameScreen implements Screen
     @Override
     public void dispose()
     {
-
+    	stage.dispose();
     }
 
 }

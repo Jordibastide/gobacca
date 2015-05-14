@@ -8,80 +8,59 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
+import com.gobacca.screens.MenuScreen;
 import com.gobacca.utils.Constants;
 
-public class MenuStage extends Stage
+public class MenuStage extends Stage 
 {
 	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
     
-    private final float TIME_STEP = 1 / 300f;
-    private float accumulator = 0f;
+    private MenuScreen screen;
     
-    private Button startButton;
-
+    private Button start_button;
     private Vector3 touchPoint;
     
-	public MenuStage()
-	{
-		super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
-		initBackground();
-		initButtons();
-		initTouchControlAreas();
-	}
-	
-	private void initBackground()
+    public MenuStage(MenuScreen s)
     {
-        addActor(new Background(Constants.MENU_BACKGROUND_IMAGE_PATH, 0, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT, 0));
-    }
-	
-	private void initButtons()
-    {
-		startButton = new Button(Constants.START_BUTTON_IMAGE_PATH, 0, 0, 50, 50);
-        addActor(startButton);
-    }
-	
-	private void initTouchControlAreas()
-    {
+    	super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
+    	
+    	screen = s;
+    	
+        initBackground();
+        initButtons();
+        
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
     }
-	
-	@Override
-    public void act(float delta)
+    
+    private void initBackground()
     {
-        super.act(delta);
-
-        // Fix timestep
-        accumulator += delta;
-
-        while (accumulator >= delta)
-        {
-            accumulator -= TIME_STEP;
-        }
+        addActor(new Background(Constants.MENU_BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 0));
     }
-	
-	@Override
-    public boolean touchDown(int x, int y, int pointer, int button)
+    
+    private void initButtons()
     {
-        translateScreenToWorldCoordinates(x, y);
-
-        if (startButtonTouched(touchPoint.x, touchPoint.y))
-        {
-            // TODO: lancer le jeu
-        	System.out.println("J'ai perdu ma couille au fond du ravin !");
-        }
-
-        return super.touchDown(x, y, pointer, button);
-    }
-
-    private boolean startButtonTouched(float x, float y)
-    {
-        return startButton.contains(x, y);
+    	start_button = new Button(Constants.START_BUTTON_IMAGE_PATH, VIEWPORT_WIDTH / 2, VIEWPORT_HEIGHT / 2, 100, 100);
+        addActor(start_button);
     }
     
     private void translateScreenToWorldCoordinates(int x, int y)
     {
         getCamera().unproject(touchPoint.set(x, y, 0));
+    }
+    
+    @Override
+    public boolean touchDown(int x, int y, int pointer, int button)
+    {
+        translateScreenToWorldCoordinates(x, y);
+
+        if (start_button.contains(touchPoint.x, touchPoint.y))
+        {
+        	System.out.println("GO !\n");
+            screen.launchGame();
+        }
+
+        return super.touchDown(x, y, pointer, button);
     }
 }
