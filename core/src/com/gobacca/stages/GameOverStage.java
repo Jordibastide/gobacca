@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
-import com.gobacca.screens.GameOverScreen;
+import com.gobacca.screens.MenuScreen;
 import com.gobacca.utils.Constants;
 
 public class GameOverStage extends Stage 
@@ -16,12 +16,12 @@ public class GameOverStage extends Stage
 	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
     
-    private GameOverScreen screen;
+    private MenuScreen screen;
     
     private Button start_button;
     private Vector3 touchPoint;
     
-    public GameOverStage(GameOverScreen s)
+    public GameOverStage(MenuScreen s)
     {
     	super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
     	
@@ -58,7 +58,7 @@ public class GameOverStage extends Stage
         if (start_button.contains(touchPoint.x, touchPoint.y))
         {
         	System.out.println("GO !\n");
-            screen.launchMenu();
+            screen.setMainMenuStage();
         }
 
         return super.touchDown(x, y, pointer, button);

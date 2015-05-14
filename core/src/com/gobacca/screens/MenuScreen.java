@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.gobacca.enums.MenuType;
 import com.gobacca.game.GobaccaGame;
 import com.gobacca.stages.*;
 
@@ -12,10 +13,34 @@ public class MenuScreen implements Screen
 	private GobaccaGame game;
     private Stage stage;
 
-    public MenuScreen(GobaccaGame g)
+    public MenuScreen(GobaccaGame g, MenuType t)
     {
     	game = g;
-        stage = new MenuStage(this);
+    	setStage(t);
+    }
+    
+    public void setStage(MenuType t)
+    {
+    	switch(t)
+    	{
+    		case GAME_OVER:
+    			setGameOverStage();
+    		break;
+    			
+    		default:
+    			setMainMenuStage();
+    		break;
+    	}
+    }
+    
+    public void setGameOverStage()
+    {
+    	 stage = new GameOverStage(this);
+    }
+    
+    public void setMainMenuStage()
+    {
+    	 stage = new MenuStage(this);
     }
     
     public void launchGame()

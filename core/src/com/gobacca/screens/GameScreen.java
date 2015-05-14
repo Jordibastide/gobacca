@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.gobacca.enums.MenuType;
 import com.gobacca.game.GobaccaGame;
 import com.gobacca.stages.*;
 
@@ -31,7 +32,7 @@ public class GameScreen implements Screen
     
     public void launchGameOver()
     {
-    	game.setGameOverScreen();
+    	game.setMenuScreen(MenuType.GAME_OVER);
     }
 
     @Override

@@ -57,7 +57,6 @@ public class MenuStage extends Stage
 
         if (start_button.contains(touchPoint.x, touchPoint.y))
         {
-        	System.out.println("GO !\n");
             screen.launchGame();
         }
 

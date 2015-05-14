@@ -1,6 +1,7 @@
 package com.gobacca.game;
 
 import com.badlogic.gdx.Game;
+import com.gobacca.enums.MenuType;
 import com.gobacca.screens.*;
 
 public class GobaccaGame extends Game
@@ -8,22 +9,17 @@ public class GobaccaGame extends Game
 	@Override
 	public void create ()
 	{
-		setMenuScreen();
+		setMenuScreen(MenuType.MAIN);
 	}
 	
-	public void setMenuScreen()
+	public void setMenuScreen(MenuType t)
 	{
-		setScreen(new MenuScreen(this));
+		setScreen(new MenuScreen(this, t));
 	}
 	
 	public void setGameScreen()
 	{
 		setScreen(new GameScreen(this));
-	}
-	
-	public void setGameOverScreen()
-	{
-		setScreen(new GameOverScreen(this));
 	}
 
 	@Override
