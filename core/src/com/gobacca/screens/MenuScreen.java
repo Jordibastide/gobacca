@@ -8,15 +8,37 @@ import com.gobacca.enums.MenuType;
 import com.gobacca.game.GobaccaGame;
 import com.gobacca.stages.*;
 
-public class GameScreen implements Screen
+public class MenuScreen implements Screen
 {
 	private GobaccaGame game;
     private Stage stage;
 
-    public GameScreen(GobaccaGame g)
+    public MenuScreen(GobaccaGame g, MenuType t)
     {
     	game = g;
-        stage = new GameStage(this);
+    	setStage(t);
+    }
+    
+    public void setStage(MenuType t)
+    {
+    	switch(t)
+    	{
+    		case GAME_OVER:
+    			setGameOverStage();
+    		break;
+    		
+    		case INFO:
+    			setInfoStage();
+    		break;
+    		
+    		case SCORE:
+    			setScoreStage();
+    		break;
+    			
+    		default:
+    			setMainMenuStage();
+    		break;
+    	}
     }
     
     public boolean isMusicON()
@@ -39,9 +61,29 @@ public class GameScreen implements Screen
     	game.setSoundState(state);
     }
     
+    public void setGameOverStage()
+    {
+    	 stage = new GameOverStage(this);
+    }
+    
     public void setMainMenuStage()
     {
-    	 game.setMenuScreen(MenuType.MAIN);
+    	 stage = new MenuStage(this);
+    }
+    
+    public void setInfoStage()
+    {
+    	 stage = new InfoStage(this);
+    }
+    
+    public void setScoreStage()
+    {
+    	 stage = new ScoreStage(this);
+    }
+    
+    public void launchGame()
+    {
+    	game.setGameScreen();
     }
 
     @Override
@@ -53,11 +95,6 @@ public class GameScreen implements Screen
         //Update the stage
         stage.draw();
         stage.act(delta);
-    }
-    
-    public void launchGameOver()
-    {
-    	game.setMenuScreen(MenuType.GAME_OVER);
     }
 
     @Override

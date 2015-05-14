@@ -54,5 +54,28 @@ public class Constants
     public static final String[] RUNNING_WIDE_ENEMY_REGION_NAMES = new String[] {"worm_walk1", "worm_walk2"};
     public static final String[] FLYING_SMALL_ENEMY_REGION_NAMES = new String[] {"bee_fly1", "bee_fly2"};
     public static final String[] FLYING_WIDE_ENEMY_REGION_NAMES = new String[] {"fly_fly1", "fly_fly2"};
-
+    
+    // Menu
+    public static final int ICON_SIZE_PX = 128;
+    
+    public static final String HOME_BUTTON_IMAGE_PATH = "icons/home.png";
+    public static final String INFO_BUTTON_IMAGE_PATH = "icons/infos.png";
+    public static final String MUSIC_0_BUTTON_IMAGE_PATH = "icons/musique_off.png";
+    public static final String MUSIC_1_BUTTON_IMAGE_PATH = "icons/musique_on.png";
+    public static final String PLAY_BUTTON_IMAGE_PATH = "icons/play.png";
+    public static final String RETRY_BUTTON_IMAGE_PATH = "icons/retry.png";
+    public static final String SCORE_BUTTON_IMAGE_PATH = "icons/score.png";
+    public static final String SOUND_0_BUTTON_IMAGE_PATH = "icons/sound_off.png";
+    public static final String SOUND_1_BUTTON_IMAGE_PATH = "icons/sound_on.png";
+    public static final String STOP_BUTTON_IMAGE_PATH = "icons/stop.png";
+    public static final String MENU_BACKGROUND_IMAGE_PATH = "bg_menu.png";
+    
+    // Game over
+    public static final String OVER_BACKGROUND_IMAGE_PATH = "game_over.jpg";
+    
+	// Info
+    public static final String CREDITS_BACKGROUND_IMAGE_PATH = "credits.png";
+    
+	// Score
+    public static final String SCORE_BACKGROUND_IMAGE_PATH = "score.jpg";
 }

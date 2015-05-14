@@ -10,37 +10,40 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.*;
+import com.gobacca.screens.GameScreen;
 import com.gobacca.utils.*;
-
 
 public class GameStage extends Stage implements ContactListener
 {
-
-    // This will be our viewport measurements while working with the debug renderer
-	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
+	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;		// This will be our viewport measurements while working with the debug renderer
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
+    
+    private GameScreen screen;
+    
+    private final float TIME_STEP = 1 / 300f;
+    private float accumulator = 0f;
 
     private World world;
     private Ground ground;
     private Ninja ninja;
 
-    private final float TIME_STEP = 1 / 300f;
-    private float accumulator = 0f;
-
     private OrthographicCamera camera;
-    // private Box2DDebugRenderer renderer;
     
     private Rectangle screenRightSide;
 
+    private static final int NB_BUTTONS = 3;
+    private Button[] buttons;
     private Vector3 touchPoint;
 
-    public GameStage()
+    public GameStage(GameScreen s)
     {
     	super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
+    	
+    	screen = s;
+    	
         initWorld();
         initCamera();
         initTouchControlAreas();
-        // renderer = new Box2DDebugRenderer();
     }
 
     private void initWorld()
@@ -51,6 +54,8 @@ public class GameStage extends Stage implements ContactListener
         initGround();
         initNinja();
         createEnemy();
+        
+        initButtons();
     }
     
     private void initBackground()
@@ -77,11 +82,28 @@ public class GameStage extends Stage implements ContactListener
         camera.update();
     }
     
+    private void initButtons()
+    {
+    	buttons = new Button[NB_BUTTONS];
+    	
+    	buttons[0] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+        
+    	if(!screen.isMusicON())
+			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
+
+		if(!screen.isSoundON())
+			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
+		
+    	for(int i = 0; i < NB_BUTTONS; ++i)
+    		addActor(buttons[i]);
+    }
+    
     private void initTouchControlAreas()
     {
         touchPoint = new Vector3();
-        screenRightSide = new Rectangle(getCamera().viewportWidth / 2, 0, getCamera().viewportWidth / 2,
-                getCamera().viewportHeight);
+        screenRightSide = new Rectangle(getCamera().viewportWidth / 2, 0, getCamera().viewportWidth / 2, getCamera().viewportHeight);
         Gdx.input.setInputProcessor(this);
     }
 
@@ -100,30 +122,65 @@ public class GameStage extends Stage implements ContactListener
         // Fix timestep
         accumulator += delta;
 
-        while (accumulator >= delta) {
+        while (accumulator >= delta)
+        {
             world.step(TIME_STEP, 6, 2);
             accumulator -= TIME_STEP;
         }
     }
-
-    /*
-    @Override
-    public void draw()
+    
+    private void translateScreenToWorldCoordinates(int x, int y)
     {
-        super.draw();
-        renderer.render(world, camera.combined);
+        getCamera().unproject(touchPoint.set(x, y, 0));
     }
-    */
     
     @Override
     public boolean touchDown(int x, int y, int pointer, int button)
     {
-
-        // Need to get the actual coordinates
-        translateScreenToWorldCoordinates(x, y);
-
-        if (rightSideTouched(touchPoint.x, touchPoint.y)) {
-            ninja.jump();
+    	translateScreenToWorldCoordinates(x, y);
+    	
+    	int i = 0;
+        while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
+        	++i;
+        
+        switch(i)
+        {
+        	case 0:
+        		screen.setMainMenuStage();
+        	break;
+        	
+        	case 1:
+        		if(screen.isMusicON())
+        		{
+        			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
+        			screen.setMusicState(false);
+        		}
+        		else
+        		{
+        			buttons[1].setTexture(Constants.MUSIC_1_BUTTON_IMAGE_PATH);
+        			screen.setMusicState(true);
+        		}
+        	break;
+        	
+        	case 2:
+        		if(screen.isSoundON())
+        		{
+        			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
+        			screen.setSoundState(false);
+        		}
+        		else
+        		{
+        			buttons[2].setTexture(Constants.SOUND_1_BUTTON_IMAGE_PATH);
+        			screen.setSoundState(true);
+        		}
+        	break;
+        	
+        	default:
+        		if (rightSideTouched(touchPoint.x, touchPoint.y))
+        		{
+                    ninja.jump();
+                }
+        	break;
         }
 
         return super.touchDown(x, y, pointer, button);
@@ -132,11 +189,6 @@ public class GameStage extends Stage implements ContactListener
     private boolean rightSideTouched(float x, float y)
     {
         return screenRightSide.contains(x, y);
-    }
-    
-    private void translateScreenToWorldCoordinates(int x, int y)
-    {
-        getCamera().unproject(touchPoint.set(x, y, 0));
     }
     
     private void update(Body body)
@@ -166,6 +218,7 @@ public class GameStage extends Stage implements ContactListener
         if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsEnemy(b)) || (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsNinja(b)))
         {
             ninja.hit();
+            screen.launchGameOver();
         }
         else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsGround(b)) || (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsNinja(b)))
         {
