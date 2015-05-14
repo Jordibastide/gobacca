@@ -58,4 +58,8 @@ public class Constants
     // Menu
     public static final String START_BUTTON_IMAGE_PATH = "start-button.jpg";
     public static final String MENU_BACKGROUND_IMAGE_PATH = "bg_menu.png";
+    
+    // Game over
+    public static final String MENU_BUTTON_IMAGE_PATH = "home-icon.png";
+    public static final String OVER_BACKGROUND_IMAGE_PATH = "game_over.jpg";
 }

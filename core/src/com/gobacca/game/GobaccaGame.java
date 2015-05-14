@@ -20,6 +20,11 @@ public class GobaccaGame extends Game
 	{
 		setScreen(new GameScreen(this));
 	}
+	
+	public void setGameOverScreen()
+	{
+		setScreen(new GameOverScreen(this));
+	}
 
 	@Override
 	public void render ()

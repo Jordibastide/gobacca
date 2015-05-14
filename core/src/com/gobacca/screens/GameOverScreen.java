@@ -7,15 +7,20 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.gobacca.game.GobaccaGame;
 import com.gobacca.stages.*;
 
-public class GameScreen implements Screen
+public class GameOverScreen implements Screen
 {
 	private GobaccaGame game;
     private Stage stage;
 
-    public GameScreen(GobaccaGame g)
+    public GameOverScreen(GobaccaGame g)
     {
     	game = g;
-        stage = new GameStage(this);
+        stage = new GameOverStage(this);
+    }
+    
+    public void launchMenu()
+    {
+    	game.setMenuScreen();
     }
 
     @Override
@@ -27,11 +32,6 @@ public class GameScreen implements Screen
         //Update the stage
         stage.draw();
         stage.act(delta);
-    }
-    
-    public void launchGameOver()
-    {
-    	game.setGameOverScreen();
     }
 
     @Override

@@ -10,12 +10,15 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.*;
+import com.gobacca.screens.GameScreen;
 import com.gobacca.utils.*;
 
 public class GameStage extends Stage implements ContactListener
 {
 	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;		// This will be our viewport measurements while working with the debug renderer
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
+    
+    private GameScreen screen;
     
     private final float TIME_STEP = 1 / 300f;
     private float accumulator = 0f;
@@ -31,9 +34,12 @@ public class GameStage extends Stage implements ContactListener
 
     private Vector3 touchPoint;
 
-    public GameStage()
+    public GameStage(GameScreen s)
     {
     	super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
+    	
+    	screen = s;
+    	
         initWorld();
         initCamera();
         initTouchControlAreas();
@@ -163,6 +169,7 @@ public class GameStage extends Stage implements ContactListener
         if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsEnemy(b)) || (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsNinja(b)))
         {
             ninja.hit();
+            screen.launchGameOver();
         }
         else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsGround(b)) || (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsNinja(b)))
         {
