@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.gobacca.actors.Ninja;
 import com.gobacca.box2d.*;
 import com.gobacca.enums.EnemyType;
 
@@ -44,11 +45,11 @@ public class WorldUtils {
         return body;
     }
     
-    public static Body createShuriken(World world)
+    public static Body createShuriken(World world, Ninja ninja)
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(new Vector2(Constants.NINJA_X + 5, Constants.NINJA_Y));
+        bodyDef.position.set(new Vector2(ninja.getX() + Constants.SHURIKEN_WIDTH + 0.1f, ninja.getY()));
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
         Body body = world.createBody(bodyDef);

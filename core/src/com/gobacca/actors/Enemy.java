@@ -45,7 +45,9 @@ public class Enemy extends GameActor
     public void act(float delta)
     {
         super.act(delta);
-        body.setLinearVelocity(getUserData().getLinearVelocity());
+        
+        if(body != null)
+        	body.setLinearVelocity(getUserData().getLinearVelocity());
     }
     
     @Override
@@ -69,5 +71,10 @@ public class Enemy extends GameActor
     public void deleteFlagON()
     {
     	deleteFlag = true;
+    }
+    
+    public void setBodyNull()
+    {
+    	body = null;
     }
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.gobacca.box2d.ShurikenUserData;
-import com.gobacca.box2d.UserData;
 import com.gobacca.utils.Constants;
 
 public class Shuriken extends GameActor
@@ -50,7 +49,7 @@ public class Shuriken extends GameActor
     }
 	
 	@Override
-	public UserData getUserData()
+	public ShurikenUserData getUserData()
 	{
 		return (ShurikenUserData) userData;
 	}
@@ -68,5 +67,15 @@ public class Shuriken extends GameActor
     public void deleteFlagON()
     {
     	deleteFlag = true;
+    }
+    
+    public void launchShuriken()
+    {
+    	body.applyLinearImpulse(getUserData().getLinearImpulse(), body.getWorldCenter(), true);
+    }
+    
+    public void setBodyNull()
+    {
+    	body = null;
     }
 }

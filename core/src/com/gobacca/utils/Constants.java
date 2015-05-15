@@ -34,6 +34,7 @@ public class Constants
     public static final String NINJA_DODGING_REGION_NAME = "alienGreen_dodge";
     public static final String NINJA_HIT_REGION_NAME = "alienGreen_hit";
     public static final String NINJA_JUMPING_REGION_NAME = "alienGreen_jump";
+    public static final int NB_SHURIKEN_NINJA_AT_START = 5;
     
     // Shuriken
     public static final String SHURIKEN_ATLAS_PATH = "shuriken_pos.txt";
@@ -43,6 +44,7 @@ public class Constants
     public static final float SHURIKEN_HEIGHT = 1f;
     public static final float SHURIKEN_GRAVITY_SCALE = 0f;
     public static float SHURIKEN_DENSITY = 0.5f;
+    public static final Vector2 SHURIKEN_LINEAR_IMPULSE = new Vector2(10f, 0);
     
     // Enemies
     public static final float ENEMY_X = 25f;

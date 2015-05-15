@@ -20,6 +20,8 @@ public class Ninja extends GameActor
     
     // Caracteristiques personnage
     int nb_shuriken;
+    float pos_x;
+    float pos_y;
 	
     public Ninja(Body body)
     {
@@ -43,7 +45,7 @@ public class Ninja extends GameActor
     
     public void initCharacter()
     {
-    	nb_shuriken = 0;
+    	nb_shuriken = Constants.NB_SHURIKEN_NINJA_AT_START;
     }
     
     @Override
@@ -54,6 +56,9 @@ public class Ninja extends GameActor
         float x = screenRectangle.x - (screenRectangle.width * 0.1f);
         float y = screenRectangle.y;
         float width = screenRectangle.width * 1.2f;
+        
+        pos_x = x;
+        pos_y = y;
 
         if(hit)
         {
@@ -102,6 +107,29 @@ public class Ninja extends GameActor
     public boolean isHit()
     {
         return hit;
+    }
+    
+    public int getNbShuriken()
+    {
+    	return nb_shuriken;
+    }
+    
+    public void useShuriken()
+    {
+    	if(nb_shuriken > 0)
+    		--nb_shuriken;
+    }
+    
+    public float getX()
+    {
+    	System.out.println("X = " + pos_x);
+    	return (pos_x / 30 );
+    }
+    
+    public float getY()
+    {
+    	System.out.println("Y = " + pos_y);
+    	return (pos_y / 30) + (1.2f * (1 - pos_y / 120));
     }
 
 }

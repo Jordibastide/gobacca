@@ -224,38 +224,73 @@ public class GameStage extends Stage implements ContactListener
         {
             if (BodyUtils.bodyIsEnemy(body) && !ninja.isHit())
             {
-                createEnemy();
+            	int i = 0;
+    	    	while(i < enemies.size() && !body.equals(enemies.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
+    	    	{
+    	    		// suppr body de la classe
+    	    		enemies.get(i).setBodyNull();
+    	    		enemies.remove(i);
+    	    		createEnemy();
+    	    	}
             }
+            else if(BodyUtils.bodyIsShuriken(body))
+            {
+            	int i = 0;
+    	    	while(i < shurikens.size() && !body.equals(shurikens.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < shurikens.size() && shurikens.get(i).getDeleteFlag())
+    	    	{
+    	    		// suppr body de la classe
+    	    		shurikens.get(i).setBodyNull();
+    	    		shurikens.remove(shurikens.get(i));
+    	    	}
+            }
+            
             world.destroyBody(body);
         }
         else
         {
-	        // DELETES ENEMIES
-	    	int i = 0;
-	    	while(i < enemies.size() && !body.equals(enemies.get(i).getBody()))
-	    	{
-	    		++i;
-	    	}
-	    	
-	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
-	    	{
-	    		enemies.remove(i);
-	    		createEnemy();
-	    		world.destroyBody(body);
-	    	}
-	    	
-	    	// DELETE SHURIKENS
-	    	i = 0;
-	    	while(i < shurikens.size() && !body.equals(shurikens.get(i).getBody()))
-	    	{
-	    		++i;
-	    	}
-	    	
-	    	if(i < shurikens.size() && shurikens.get(i).getDeleteFlag())
-	    	{
-	    		shurikens.remove(shurikens.get(i));
-	    		world.destroyBody(body);
-	    	}
+        	if (BodyUtils.bodyIsEnemy(body) && !ninja.isHit())
+            {
+            	int i = 0;
+    	    	while(i < enemies.size() && !body.equals(enemies.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
+    	    	{
+    	    		// suppr body de la classe
+    	    		enemies.get(i).setBodyNull();
+    	    		enemies.remove(i);
+    	    		createEnemy();
+    	    		world.destroyBody(body);
+    	    	}
+            }
+        	else if(BodyUtils.bodyIsShuriken(body))
+            {
+            	int i = 0;
+    	    	while(i < shurikens.size() && !body.equals(shurikens.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < shurikens.size() && shurikens.get(i).getDeleteFlag())
+    	    	{
+    	    		// suppr body de la classe
+    	    		shurikens.get(i).setBodyNull();
+    	    		shurikens.remove(shurikens.get(i));
+    	    		world.destroyBody(body);
+    	    	}
+            }
         }
     }
 
@@ -267,10 +302,15 @@ public class GameStage extends Stage implements ContactListener
     
     private void launchShuriken()
     {
-    	shurikens.add(new Shuriken(WorldUtils.createShuriken(world)));
-        addActor(shurikens.get(shurikens.size() - 1));
-        
-        System.out.println(shurikens.size());
+    	if(ninja.getNbShuriken() > 0)
+    	{
+	    	shurikens.add(new Shuriken(WorldUtils.createShuriken(world, ninja)));
+	        addActor(shurikens.get(shurikens.size() - 1));
+	        
+	        shurikens.get(shurikens.size() - 1).launchShuriken();
+	        
+	        ninja.useShuriken();
+    	}
     }
     
     @Override
