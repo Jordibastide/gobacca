@@ -59,9 +59,9 @@ public class GameStage extends Stage implements ContactListener
     
     private void initBackground()
     {
-        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz3, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 50));
-        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz2, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 150));
-        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz1, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 250));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 50));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 150));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 250));
     }
 
     private void initGround()
@@ -148,6 +148,7 @@ public class GameStage extends Stage implements ContactListener
         {
         	case 0:
         		screen.setMusicState(false);
+        		AudioUtils.disposeAudio();
         		screen.setMainMenuStage();
         	break;
         	
@@ -156,6 +157,7 @@ public class GameStage extends Stage implements ContactListener
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
+        			AudioUtils.disposeAudio();
         		}
         		else
         		{

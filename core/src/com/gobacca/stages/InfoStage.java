@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
 import com.gobacca.screens.MenuScreen;
+import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
 
 public class InfoStage extends Stage 
@@ -76,6 +77,7 @@ public class InfoStage extends Stage
         {
         	case 0:
         		screen.setMusicState(false);
+        		AudioUtils.disposeAudio();
         		screen.setMainMenuStage();
         	break;
         	
@@ -84,6 +86,7 @@ public class InfoStage extends Stage
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
+        			AudioUtils.disposeAudio();
         		}
         		else
         		{

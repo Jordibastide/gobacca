@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.audio.Sound;
 import com.gobacca.box2d.NinjaUserData;
+import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
 
 public class Ninja extends GameActor
