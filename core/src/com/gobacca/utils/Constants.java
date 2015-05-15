@@ -78,4 +78,9 @@ public class Constants
     
 	// Score
     public static final String SCORE_BACKGROUND_IMAGE_PATH = "score.jpg";
+    
+    //Sounds
+    public static final String RUNNER_JUMPING_SOUND = "jump.wav";
+    public static final String RUNNER_HIT_SOUND = "hit.wav";
+    public static final String GAME_MUSIC = "fun_in_a_bottle.mp3";
 }

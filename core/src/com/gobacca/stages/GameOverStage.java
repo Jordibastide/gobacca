@@ -106,6 +106,7 @@ public class GameOverStage extends Stage
         	break;
         	
         	case 3:
+        		screen.setMusicState(false);
         		screen.setMainMenuStage();
         	break;
         	

@@ -3,6 +3,7 @@ package com.gobacca.game;
 import com.badlogic.gdx.Game;
 import com.gobacca.enums.MenuType;
 import com.gobacca.screens.*;
+import com.gobacca.utils.*;
 
 public class GobaccaGame extends Game
 {
@@ -41,6 +42,12 @@ public class GobaccaGame extends Game
     public void setMusicState(boolean state)
     {
     	music_ON = state;
+    	if(music_ON == true){
+    		AudioUtils.getInstance().playMusic();
+    	}
+    	else{
+    		AudioUtils.getInstance().pauseMusic();
+    	}
     }
     
     public void setSoundState(boolean state)

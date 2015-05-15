@@ -10,6 +10,7 @@ import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
 import com.gobacca.enums.MenuType;
 import com.gobacca.screens.MenuScreen;
+import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
 
 public class MenuStage extends Stage 
@@ -30,6 +31,8 @@ public class MenuStage extends Stage
     	screen = s;
     	
         initBackground();
+        AudioUtils.getInstance().init();
+        screen.setMusicState(true);
         initButtons();
         
         touchPoint = new Vector3();

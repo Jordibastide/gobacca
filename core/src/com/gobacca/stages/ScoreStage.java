@@ -75,6 +75,7 @@ public class ScoreStage extends Stage
         switch(i)
         {
         	case 0:
+        		screen.setMusicState(false);
         		screen.setMainMenuStage();
         	break;
         	

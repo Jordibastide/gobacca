@@ -54,7 +54,6 @@ public class GameStage extends Stage implements ContactListener
         initGround();
         initNinja();
         createEnemy();
-        
         initButtons();
     }
     
@@ -146,6 +145,7 @@ public class GameStage extends Stage implements ContactListener
         switch(i)
         {
         	case 0:
+        		screen.setMusicState(false);
         		screen.setMainMenuStage();
         	break;
         	

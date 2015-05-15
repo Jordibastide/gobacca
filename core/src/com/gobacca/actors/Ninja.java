@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.audio.Sound;
 import com.gobacca.box2d.NinjaUserData;
 import com.gobacca.utils.Constants;
 
@@ -17,6 +18,9 @@ public class Ninja extends GameActor
     private TextureRegion jumpingTexture;
     private TextureRegion hitTexture;
     private float stateTime;
+    
+    private Sound jumpSound;
+    private Sound hitSound;
 	
     public Ninja(Body body)
     {
@@ -32,6 +36,8 @@ public class Ninja extends GameActor
          stateTime = 0f;
          jumpingTexture = textureAtlas.findRegion(Constants.NINJA_JUMPING_REGION_NAME);
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
+         jumpSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_JUMPING_SOUND));
+         hitSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_HIT_SOUND));
     }
     
     @Override
@@ -73,6 +79,7 @@ public class Ninja extends GameActor
         {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
             jumping = true;
+            jumpSound.play();
         }
     }
 
@@ -85,6 +92,7 @@ public class Ninja extends GameActor
     {
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
+        hitSound.play();
     }
 
     public boolean isHit()
