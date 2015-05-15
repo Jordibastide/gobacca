@@ -59,7 +59,9 @@ public class GameStage extends Stage implements ContactListener
     
     private void initBackground()
     {
-        addActor(new Background());
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz3, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 50));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz2, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 150));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz1, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 250));
     }
 
     private void initGround()

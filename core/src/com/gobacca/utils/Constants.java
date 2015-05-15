@@ -37,6 +37,9 @@ public class Constants
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Textures world
+    public static final String BACKGROUND_IMAGE_PATHz1 = "backgroundz1.png";
+    public static final String BACKGROUND_IMAGE_PATHz2 = "backgroundz2.png";
+    public static final String BACKGROUND_IMAGE_PATHz3 = "backgroundz3.png";
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
     public static final String GROUND_IMAGE_PATH = "ground.png";
     
