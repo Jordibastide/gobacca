@@ -31,9 +31,10 @@ public class Constants
     // Enemies
     public static final float ENEMY_X = 40f;
     public static final float ENEMY_DENSITY = NINJA_DENSITY;
-    public static final float RUNNING_SHORT_ENEMY_Y = 1.5f;
-    public static final float RUNNING_LONG_ENEMY_Y = 1.8f;
-    public static final float FLYING_ENEMY_Y = 3f;
+    //public static final float RUNNING_SHORT_ENEMY_Y = 1.5f;
+    //public static final float RUNNING_LONG_ENEMY_Y = 1.8f;
+    //public static final float FLYING_ENEMY_Y = 3f;
+    public static final float BERNARD_ENEMY_Y = 1.8f;
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Textures world
@@ -59,7 +60,7 @@ public class Constants
     //public static final String[] RUNNING_WIDE_ENEMY_REGION_NAMES = new String[] {"worm_walk1", "worm_walk2"};
     //public static final String[] FLYING_SMALL_ENEMY_REGION_NAMES = new String[] {"bee_fly1", "bee_fly2"};
     //public static final String[] FLYING_WIDE_ENEMY_REGION_NAMES = new String[] {"fly_fly1", "fly_fly2"};
-    public static final String[] RUNNING_BIG_ENEMY_REGION_NAMES = new String[] {"gros1", "gros2", "gros3", "gros4", "gros5", "gros6", "gros7", "gros8"};
+    public static final String[] BERNARD_ENEMY_REGION_NAMES = new String[] {"gros1", "gros2", "gros3", "gros4", "gros5", "gros6", "gros7", "gros8"};
     
     // Menu
     public static final int ICON_SIZE_PX = 128;
