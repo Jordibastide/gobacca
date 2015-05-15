@@ -15,7 +15,7 @@ public class EnemyUserData extends UserData
         super(width, height);
         userDataType = UserDataType.ENEMY;
         linearVelocity = Constants.ENEMY_LINEAR_VELOCITY;
-        this.textureRegions = textureRegions;		
+        this.textureRegions = textureRegions;
     }
 
 	// GETTERS

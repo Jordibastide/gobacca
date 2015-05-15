@@ -10,13 +10,13 @@ public class BodyUtils
 	{
 		UserData userData = (UserData) body.getUserData();
 
-		// float p;
 		switch (userData.getUserDataType())
 		{
 			case NINJA:
 			case ENEMY:
 				return body.getPosition().x + userData.getWidth() / 2 > 0;
 			case GROUND:
+			case SHURIKEN:
 		}
 		
 		return true;
@@ -32,6 +32,12 @@ public class BodyUtils
     {
         UserData userData = (UserData) body.getUserData();
         return userData != null && userData.getUserDataType() == UserDataType.NINJA;
+    }
+    
+    public static boolean bodyIsShuriken(Body body)
+    {
+        UserData userData = (UserData) body.getUserData();
+        return userData != null && userData.getUserDataType() == UserDataType.SHURIKEN;
     }
 
     public static boolean bodyIsGround(Body body)

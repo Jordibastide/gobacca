@@ -17,10 +17,16 @@ public class Ninja extends GameActor
     private TextureRegion jumpingTexture;
     private TextureRegion hitTexture;
     private float stateTime;
+    
+    // Caracteristiques personnage
+    int nb_shuriken;
+    float pos_x;
+    float pos_y;
 	
     public Ninja(Body body)
     {
     	 super(body);
+    	 
          TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
          TextureRegion[] runningFrames = new TextureRegion[Constants.NINJA_RUNNING_REGION_NAMES.length];
          for (int i = 0; i < Constants.NINJA_RUNNING_REGION_NAMES.length; i++)
@@ -28,10 +34,18 @@ public class Ninja extends GameActor
              String path = Constants.NINJA_RUNNING_REGION_NAMES[i];
              runningFrames[i] = textureAtlas.findRegion(path);
          }
+         
          runningAnimation = new Animation(0.1f, runningFrames);
          stateTime = 0f;
          jumpingTexture = textureAtlas.findRegion(Constants.NINJA_JUMPING_REGION_NAME);
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
+         
+         initCharacter();
+    }
+    
+    public void initCharacter()
+    {
+    	nb_shuriken = Constants.NB_SHURIKEN_NINJA_AT_START;
     }
     
     @Override
@@ -42,6 +56,9 @@ public class Ninja extends GameActor
         float x = screenRectangle.x - (screenRectangle.width * 0.1f);
         float y = screenRectangle.y;
         float width = screenRectangle.width * 1.2f;
+        
+        pos_x = x;
+        pos_y = y;
 
         if(hit)
         {
@@ -90,6 +107,24 @@ public class Ninja extends GameActor
     public boolean isHit()
     {
         return hit;
+    }
+    
+    public int getNbShuriken()
+    {
+    	return nb_shuriken;
+    }
+    
+    public void useShuriken()
+    {
+    	if(nb_shuriken > 0)
+    	{
+    		--nb_shuriken;
+    	}
+    }
+    
+    public float getY()
+    {
+    	return (pos_y / 30) + (1.2f * (1 - pos_y / 120));
     }
 
 }

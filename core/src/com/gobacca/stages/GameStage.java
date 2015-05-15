@@ -1,5 +1,6 @@
 package com.gobacca.stages;
 
+import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
@@ -26,10 +27,13 @@ public class GameStage extends Stage implements ContactListener
     private World world;
     private Ground ground;
     private Ninja ninja;
+    private ArrayList<Enemy> enemies;
+    private ArrayList<Shuriken> shurikens;
 
     private OrthographicCamera camera;
     
     private Rectangle screenRightSide;
+    private Rectangle screenLeftSide;
 
     private static final int NB_BUTTONS = 3;
     private Button[] buttons;
@@ -41,6 +45,8 @@ public class GameStage extends Stage implements ContactListener
     	
     	screen = s;
     	
+    	initEnemies();
+    	initShurikens();
         initWorld();
         initCamera();
         initTouchControlAreas();
@@ -74,6 +80,16 @@ public class GameStage extends Stage implements ContactListener
         ninja = new Ninja(WorldUtils.createNinja(world));
         addActor(ninja);
     }
+    
+    private void initEnemies()
+    {
+    	enemies = new ArrayList<Enemy>();
+    }
+    
+    private void initShurikens()
+    {
+    	shurikens = new ArrayList<Shuriken>();
+    }
 
     private void initCamera()
     {
@@ -104,6 +120,7 @@ public class GameStage extends Stage implements ContactListener
     {
         touchPoint = new Vector3();
         screenRightSide = new Rectangle(getCamera().viewportWidth / 2, 0, getCamera().viewportWidth / 2, getCamera().viewportHeight);
+        screenLeftSide = new Rectangle(0, 0, getCamera().viewportWidth / 2, getCamera().viewportHeight);
         Gdx.input.setInputProcessor(this);
     }
 
@@ -115,7 +132,8 @@ public class GameStage extends Stage implements ContactListener
         Array<Body> bodies = new Array<Body>(world.getBodyCount());
         world.getBodies(bodies);
 
-        for (Body body : bodies) {
+        for (Body body : bodies)
+        {
             update(body);
         }
 
@@ -176,10 +194,14 @@ public class GameStage extends Stage implements ContactListener
         	break;
         	
         	default:
-        		if (rightSideTouched(touchPoint.x, touchPoint.y))
+        		if(rightSideTouched(touchPoint.x, touchPoint.y))
         		{
                     ninja.jump();
                 }
+        		else if(leftSideTouched(touchPoint.x, touchPoint.y))
+        		{
+        			launchShuriken();
+        		}
         	break;
         }
 
@@ -191,22 +213,104 @@ public class GameStage extends Stage implements ContactListener
         return screenRightSide.contains(x, y);
     }
     
+    private boolean leftSideTouched(float x, float y)
+    {
+        return screenLeftSide.contains(x, y);
+    }
+    
     private void update(Body body)
     {
         if (!BodyUtils.bodyInBounds(body))
         {
             if (BodyUtils.bodyIsEnemy(body) && !ninja.isHit())
             {
-                createEnemy();
+            	int i = 0;
+    	    	while(i < enemies.size() && !body.equals(enemies.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
+    	    	{
+    	    		createEnemy();
+    	    		// suppr body de la classe
+    	    		enemies.get(i).setBodyNull();
+    	    		enemies.remove(i);
+    	    	}
             }
+            else if(BodyUtils.bodyIsShuriken(body))
+            {
+            	int i = 0;
+    	    	while(i < shurikens.size() && !body.equals(shurikens.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < shurikens.size() && shurikens.get(i).getDeleteFlag())
+    	    	{
+    	    		// suppr body de la classe
+    	    		shurikens.get(i).setBodyNull();
+    	    		shurikens.remove(shurikens.get(i));
+    	    	}
+            }
+            
             world.destroyBody(body);
+        }
+        else
+        {
+        	if (BodyUtils.bodyIsEnemy(body) && !ninja.isHit())
+            {
+            	int i = 0;
+    	    	while(i < enemies.size() && !body.equals(enemies.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
+    	    	{
+    	    		// suppr body de la classe
+    	    		enemies.get(i).setBodyNull();
+    	    		enemies.remove(i);
+    	    		createEnemy();
+    	    		world.destroyBody(body);
+    	    	}
+            }
+        	else if(BodyUtils.bodyIsShuriken(body))
+            {
+            	int i = 0;
+    	    	while(i < shurikens.size() && !body.equals(shurikens.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < shurikens.size() && shurikens.get(i).getDeleteFlag())
+    	    	{
+    	    		// suppr body de la classe
+    	    		shurikens.get(i).setBodyNull();
+    	    		shurikens.remove(shurikens.get(i));
+    	    		world.destroyBody(body);
+    	    	}
+            }
         }
     }
 
     private void createEnemy()
     {
-        Enemy enemy = new Enemy(WorldUtils.createEnemy(world));
-        addActor(enemy);
+        enemies.add(new Enemy(WorldUtils.createEnemy(world)));
+        addActor(enemies.get(enemies.size() - 1));
+    }
+    
+    private void launchShuriken()
+    {
+    	if(ninja.getNbShuriken() > 0)
+    	{
+	    	shurikens.add(new Shuriken(WorldUtils.createShuriken(world, ninja)));
+	        addActor(shurikens.get(shurikens.size() - 1));
+	        
+	        shurikens.get(shurikens.size() - 1).launchShuriken();
+	        
+	        ninja.useShuriken();
+    	}
     }
     
     @Override
@@ -220,11 +324,43 @@ public class GameStage extends Stage implements ContactListener
             ninja.hit();
             screen.launchGameOver();
         }
+        else if((BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsShuriken(b)))
+        {
+        	deleteShuriken(b);
+        	killEnemy(a);
+        }
+        else if((BodyUtils.bodyIsShuriken(a) && BodyUtils.bodyIsEnemy(b)))
+        {
+        	deleteShuriken(a);
+        	killEnemy(b);
+        }
         else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsGround(b)) || (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsNinja(b)))
         {
         	ninja.landed();
         }
 
+    }
+    
+    private void killEnemy(Body b)
+    {
+    	int i = 0;
+    	while(i < enemies.size() && !b.equals(enemies.get(i).getBody()))
+    		++i;
+    	
+    	if(i < enemies.size())
+    		enemies.get(i).deleteFlagON();
+    }
+    
+    private void deleteShuriken(Body b)
+    {
+    	int i = 0;
+    	while(i < shurikens.size() && !b.equals(shurikens.get(i).getBody()))
+    		++i;
+    	
+    	if(i < shurikens.size())
+    	{
+    		shurikens.get(i).deleteFlagON();
+    	}	
     }
     
     @Override

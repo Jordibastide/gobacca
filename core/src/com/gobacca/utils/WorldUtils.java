@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.gobacca.actors.Ninja;
 import com.gobacca.box2d.*;
 import com.gobacca.enums.EnemyType;
 
@@ -40,6 +41,22 @@ public class WorldUtils {
         body.createFixture(shape, Constants.NINJA_DENSITY);
         body.resetMassData();
         body.setUserData(new NinjaUserData(Constants.NINJA_WIDTH, Constants.NINJA_HEIGHT));
+        shape.dispose();
+        return body;
+    }
+    
+    public static Body createShuriken(World world, Ninja ninja)
+    {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(new Vector2(Constants.NINJA_X + Constants.SHURIKEN_WIDTH + 0.55f, ninja.getY()));
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
+        Body body = world.createBody(bodyDef);
+        body.setGravityScale(Constants.SHURIKEN_GRAVITY_SCALE);
+        body.createFixture(shape, Constants.SHURIKEN_DENSITY);
+        body.resetMassData();
+        body.setUserData(new ShurikenUserData(Constants.SHURIKEN_WIDTH, Constants.SHURIKEN_HEIGHT));
         shape.dispose();
         return body;
     }

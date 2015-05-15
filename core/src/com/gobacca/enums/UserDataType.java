@@ -5,6 +5,7 @@ public enum UserDataType
 
     GROUND,
     NINJA,
-    ENEMY
+    ENEMY,
+    SHURIKEN
 
 }
