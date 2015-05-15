@@ -30,6 +30,8 @@ public class GameStage extends Stage implements ContactListener
     private OrthographicCamera camera;
     
     private Rectangle screenRightSide;
+    
+    private Score score;
 
     private static final int NB_BUTTONS = 3;
     private Button[] buttons;
@@ -55,13 +57,14 @@ public class GameStage extends Stage implements ContactListener
         initNinja();
         createEnemy();
         initButtons();
+        initScore();
     }
     
     private void initBackground()
     {
-        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 50));
-        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 150));
-        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATH, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 250));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz3, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 50));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz2, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 150));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz1, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 250));
     }
 
     private void initGround()
@@ -87,9 +90,9 @@ public class GameStage extends Stage implements ContactListener
     {
     	buttons = new Button[NB_BUTTONS];
     	
-    	buttons[0] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[0] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX_INGAME - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
+    	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
+    	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX_INGAME + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
         
     	if(!screen.isMusicON())
 			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
@@ -99,6 +102,12 @@ public class GameStage extends Stage implements ContactListener
 		
     	for(int i = 0; i < NB_BUTTONS; ++i)
     		addActor(buttons[i]);
+    }
+    
+    private void initScore() {
+        Rectangle scoreBounds = new Rectangle(getCamera().viewportWidth / 4, getCamera().viewportHeight - 20, getCamera().viewportWidth / 4, getCamera().viewportHeight / 8);
+        score = new Score(scoreBounds);
+        addActor(score);
     }
     
     private void initTouchControlAreas()

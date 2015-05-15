@@ -32,7 +32,7 @@ public class Constants
     public static final float ENEMY_X = 40f;
     public static final float ENEMY_DENSITY = NINJA_DENSITY;
     public static final float RUNNING_SHORT_ENEMY_Y = 1.5f;
-    public static final float RUNNING_LONG_ENEMY_Y = 2f;
+    public static final float RUNNING_LONG_ENEMY_Y = 1.8f;
     public static final float FLYING_ENEMY_Y = 3f;
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
@@ -63,6 +63,7 @@ public class Constants
     
     // Menu
     public static final int ICON_SIZE_PX = 128;
+    public static final int ICON_SIZE_PX_INGAME = 64;
     
     public static final String HOME_BUTTON_IMAGE_PATH = "icons/home.png";
     public static final String INFO_BUTTON_IMAGE_PATH = "icons/infos.png";
@@ -89,4 +90,7 @@ public class Constants
     public static final String RUNNER_JUMPING_SOUND = "jump.wav";
     public static final String RUNNER_HIT_SOUND = "hit.wav";
     public static final String GAME_MUSIC = "fun_in_a_bottle.mp3";
+    
+    //Font
+    public static final String FONT_NAME = "roboto_bold.ttf";
 }

@@ -100,5 +100,10 @@ public class Ninja extends GameActor
     {
         return hit;
     }
+    
+    public void dispose() {
+        jumpSound.dispose();
+        hitSound.dispose();
+    }
 
 }
