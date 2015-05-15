@@ -232,10 +232,11 @@ public class GameStage extends Stage implements ContactListener
     	    	
     	    	if(i < enemies.size())
     	    	{
+    	    		createEnemy();
+    	    		
     	    		// suppr body de la classe
     	    		enemies.get(i).setBodyNull();
     	    		enemies.remove(i);
-    	    		createEnemy();
     	    	}
             }
             else if(BodyUtils.bodyIsShuriken(body))
