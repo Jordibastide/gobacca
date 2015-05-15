@@ -117,7 +117,9 @@ public class Ninja extends GameActor
     public void useShuriken()
     {
     	if(nb_shuriken > 0)
+    	{
     		--nb_shuriken;
+    	}
     }
     
     public float getX()

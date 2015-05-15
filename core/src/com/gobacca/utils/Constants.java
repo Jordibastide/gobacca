@@ -34,7 +34,7 @@ public class Constants
     public static final String NINJA_DODGING_REGION_NAME = "alienGreen_dodge";
     public static final String NINJA_HIT_REGION_NAME = "alienGreen_hit";
     public static final String NINJA_JUMPING_REGION_NAME = "alienGreen_jump";
-    public static final int NB_SHURIKEN_NINJA_AT_START = 5;
+    public static final int NB_SHURIKEN_NINJA_AT_START = 500;
     
     // Shuriken
     public static final String SHURIKEN_ATLAS_PATH = "shuriken_pos.txt";
