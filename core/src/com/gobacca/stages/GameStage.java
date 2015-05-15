@@ -230,9 +230,10 @@ public class GameStage extends Stage implements ContactListener
     	    		++i;
     	    	}
     	    	
-    	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
+    	    	if(i < enemies.size())
     	    	{
     	    		createEnemy();
+    	    		
     	    		// suppr body de la classe
     	    		enemies.get(i).setBodyNull();
     	    		enemies.remove(i);
@@ -246,7 +247,7 @@ public class GameStage extends Stage implements ContactListener
     	    		++i;
     	    	}
     	    	
-    	    	if(i < shurikens.size() && shurikens.get(i).getDeleteFlag())
+    	    	if(i < shurikens.size())
     	    	{
     	    		// suppr body de la classe
     	    		shurikens.get(i).setBodyNull();
