@@ -122,15 +122,8 @@ public class Ninja extends GameActor
     	}
     }
     
-    public float getX()
-    {
-    	System.out.println("X = " + pos_x);
-    	return (pos_x / 30 );
-    }
-    
     public float getY()
     {
-    	System.out.println("Y = " + pos_y);
     	return (pos_y / 30) + (1.2f * (1 - pos_y / 120));
     }
 

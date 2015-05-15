@@ -49,7 +49,7 @@ public class WorldUtils {
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(new Vector2(ninja.getX() + Constants.SHURIKEN_WIDTH + 0.55f, ninja.getY()));
+        bodyDef.position.set(new Vector2(Constants.NINJA_X + Constants.SHURIKEN_WIDTH + 0.55f, ninja.getY()));
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
         Body body = world.createBody(bodyDef);

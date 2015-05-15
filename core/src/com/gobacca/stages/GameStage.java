@@ -232,10 +232,10 @@ public class GameStage extends Stage implements ContactListener
     	    	
     	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
     	    	{
+    	    		createEnemy();
     	    		// suppr body de la classe
     	    		enemies.get(i).setBodyNull();
     	    		enemies.remove(i);
-    	    		createEnemy();
     	    	}
             }
             else if(BodyUtils.bodyIsShuriken(body))
@@ -326,13 +326,13 @@ public class GameStage extends Stage implements ContactListener
         }
         else if((BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsShuriken(b)))
         {
-        	killEnemy(a);
         	deleteShuriken(b);
+        	killEnemy(a);
         }
         else if((BodyUtils.bodyIsShuriken(a) && BodyUtils.bodyIsEnemy(b)))
         {
-        	killEnemy(b);
         	deleteShuriken(a);
+        	killEnemy(b);
         }
         else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsGround(b)) || (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsNinja(b)))
         {
