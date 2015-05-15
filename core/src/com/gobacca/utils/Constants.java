@@ -37,6 +37,7 @@ public class Constants
     public static final int NB_SHURIKEN_NINJA_AT_START = 500;
     
     // Shuriken
+    public static final String SHURIKEN_IMAGE_PATH = "shuriken.png";
     public static final String SHURIKEN_ATLAS_PATH = "shuriken_pos.txt";
     public static final String[] SHURIKEN_REGION_NAMES = new String[] {	"shuriken_pos_0", "shuriken_pos_1", "shuriken_pos_2",
     																			"shuriken_pos_3", "shuriken_pos_4", "shuriken_pos_5"};

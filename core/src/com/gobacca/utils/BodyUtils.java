@@ -17,6 +17,7 @@ public class BodyUtils
 				return body.getPosition().x + userData.getWidth() / 2 > 0;
 			case GROUND:
 			case SHURIKEN:
+			case AMMO:
 		}
 		
 		return true;
