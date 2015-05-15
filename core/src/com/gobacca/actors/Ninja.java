@@ -25,14 +25,14 @@ public class Ninja extends GameActor
     public Ninja(Body body)
     {
     	 super(body);
-         TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
+         TextureAtlas textureAtlas = new TextureAtlas(Constants.NINJA_ATLAS_PATH);
          TextureRegion[] runningFrames = new TextureRegion[Constants.NINJA_RUNNING_REGION_NAMES.length];
          for (int i = 0; i < Constants.NINJA_RUNNING_REGION_NAMES.length; i++)
          {
              String path = Constants.NINJA_RUNNING_REGION_NAMES[i];
              runningFrames[i] = textureAtlas.findRegion(path);
          }
-         runningAnimation = new Animation(0.1f, runningFrames);
+         runningAnimation = new Animation(0.05f, runningFrames);
          stateTime = 0f;
          jumpingTexture = textureAtlas.findRegion(Constants.NINJA_JUMPING_REGION_NAME);
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);

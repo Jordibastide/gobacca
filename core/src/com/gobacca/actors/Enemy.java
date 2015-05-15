@@ -18,7 +18,7 @@ public class Enemy extends GameActor
     {
         super(body);
         
-        TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
+        TextureAtlas textureAtlas = new TextureAtlas(Constants.ENNEMY_ATLAS_PATH);
         TextureRegion[] runningFrames = new TextureRegion[getUserData().getTextureRegions().length];
         
         for (int i = 0; i < getUserData().getTextureRegions().length; i++)
