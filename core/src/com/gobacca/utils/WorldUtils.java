@@ -44,6 +44,22 @@ public class WorldUtils {
         return body;
     }
     
+    public static Body createShuriken(World world)
+    {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(new Vector2(Constants.NINJA_X + 5, Constants.NINJA_Y));
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
+        Body body = world.createBody(bodyDef);
+        body.setGravityScale(Constants.SHURIKEN_GRAVITY_SCALE);
+        body.createFixture(shape, Constants.SHURIKEN_DENSITY);
+        body.resetMassData();
+        body.setUserData(new ShurikenUserData(Constants.SHURIKEN_WIDTH, Constants.SHURIKEN_HEIGHT));
+        shape.dispose();
+        return body;
+    }
+    
     public static Body createEnemy(World world)
     {
         EnemyType enemyType = RandomUtils.getRandomEnemyType();

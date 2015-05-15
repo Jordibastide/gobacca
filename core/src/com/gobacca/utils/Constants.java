@@ -28,6 +28,22 @@ public class Constants
     public static final Vector2 NINJA_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
     public static final float NINJA_HIT_ANGULAR_IMPULSE = 10f;
     
+    // Texture Ninja
+    public static final String CHARACTERS_ATLAS_PATH = "characters.txt";
+    public static final String[] NINJA_RUNNING_REGION_NAMES = new String[] {"alienGreen_run1", "alienGreen_run2"};
+    public static final String NINJA_DODGING_REGION_NAME = "alienGreen_dodge";
+    public static final String NINJA_HIT_REGION_NAME = "alienGreen_hit";
+    public static final String NINJA_JUMPING_REGION_NAME = "alienGreen_jump";
+    
+    // Shuriken
+    public static final String SHURIKEN_ATLAS_PATH = "shuriken_pos.txt";
+    public static final String[] SHURIKEN_REGION_NAMES = new String[] {	"shuriken_pos_0", "shuriken_pos_1", "shuriken_pos_2",
+    																			"shuriken_pos_3", "shuriken_pos_4", "shuriken_pos_5"};
+    public static final float SHURIKEN_WIDTH = 1f;
+    public static final float SHURIKEN_HEIGHT = 1f;
+    public static final float SHURIKEN_GRAVITY_SCALE = 0f;
+    public static float SHURIKEN_DENSITY = 0.5f;
+    
     // Enemies
     public static final float ENEMY_X = 25f;
     public static final float ENEMY_DENSITY = NINJA_DENSITY;
@@ -39,13 +55,6 @@ public class Constants
     // Textures world
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
     public static final String GROUND_IMAGE_PATH = "ground.png";
-    
-    // Texture sprites
-    public static final String CHARACTERS_ATLAS_PATH = "characters.txt";
-    public static final String[] NINJA_RUNNING_REGION_NAMES = new String[] {"alienGreen_run1", "alienGreen_run2"};
-    public static final String NINJA_DODGING_REGION_NAME = "alienGreen_dodge";
-    public static final String NINJA_HIT_REGION_NAME = "alienGreen_hit";
-    public static final String NINJA_JUMPING_REGION_NAME = "alienGreen_jump";
     
     // Enemies
     public static final String[] RUNNING_SMALL_ENEMY_REGION_NAMES = new String[] {"ladyBug_walk1", "ladyBug_walk2"};

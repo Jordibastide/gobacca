@@ -17,10 +17,14 @@ public class Ninja extends GameActor
     private TextureRegion jumpingTexture;
     private TextureRegion hitTexture;
     private float stateTime;
+    
+    // Caracteristiques personnage
+    int nb_shuriken;
 	
     public Ninja(Body body)
     {
     	 super(body);
+    	 
          TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
          TextureRegion[] runningFrames = new TextureRegion[Constants.NINJA_RUNNING_REGION_NAMES.length];
          for (int i = 0; i < Constants.NINJA_RUNNING_REGION_NAMES.length; i++)
@@ -28,10 +32,18 @@ public class Ninja extends GameActor
              String path = Constants.NINJA_RUNNING_REGION_NAMES[i];
              runningFrames[i] = textureAtlas.findRegion(path);
          }
+         
          runningAnimation = new Animation(0.1f, runningFrames);
          stateTime = 0f;
          jumpingTexture = textureAtlas.findRegion(Constants.NINJA_JUMPING_REGION_NAME);
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
+         
+         initCharacter();
+    }
+    
+    public void initCharacter()
+    {
+    	nb_shuriken = 0;
     }
     
     @Override
