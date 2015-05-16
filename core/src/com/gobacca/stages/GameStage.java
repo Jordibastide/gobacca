@@ -1,9 +1,11 @@
 package com.gobacca.stages;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -414,8 +416,12 @@ public class GameStage extends Stage implements ContactListener
         {
         	if (a.getLinearVelocity().y > 0)
         		contact.setEnabled(false);
-        	else
+        	else 
+        	{
         		contact.setEnabled(true);
+        		a.setLinearVelocity(new Vector2(0.05f, 0));
+        	}
+        	
         }
     	
     	if((BodyUtils.bodyIsNinja(b) && BodyUtils.bodyIsPlatform(a)))
@@ -423,7 +429,10 @@ public class GameStage extends Stage implements ContactListener
         	if (b.getLinearVelocity().y > 0)
         		contact.setEnabled(false);
         	else
+        	{
         		contact.setEnabled(true);
+        		b.setLinearVelocity(new Vector2(0.05f, 0));
+        	}
         }
     }
 

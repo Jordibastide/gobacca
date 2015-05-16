@@ -55,7 +55,7 @@ public class Constants
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Platforms
-    public static final float PLATFORM_X = 30f;
+    public static final float PLATFORM_X = 50f;
     public static final float PLATFORM_Y = 5f;
     public static final float PLATFORM_HEIGHT = 1f;
     public static final float PLATFORM_DENSITY = 0f;

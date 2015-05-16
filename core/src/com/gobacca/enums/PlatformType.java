@@ -4,9 +4,9 @@ import com.gobacca.utils.Constants;
 
 public enum PlatformType
 {
-	PLATFORM_SMALL	(	5f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY),
-    PLATFORM_MEDIUM	(  10f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY),
-	PLATFORM_LONG	(  15f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY);
+	PLATFORM_SMALL	(	25f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY),
+    PLATFORM_MEDIUM	(  30f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY),
+	PLATFORM_LONG	(  55f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY);
 
     private float width;
     private float height;

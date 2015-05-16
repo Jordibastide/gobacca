@@ -19,7 +19,6 @@ public class Platform extends GameActor
         body = b;
         
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.GROUND_IMAGE_PATH)));
-        new Rectangle(50, 5, getUserData().getWidth(), getUserData().getHeight());
     }
 
     @Override

@@ -89,6 +89,7 @@ public class WorldUtils {
         shape.setAsBox(platformType.getWidth() / 2, platformType.getHeight() / 2);
         Body body = world.createBody(bodyDef);
         body.createFixture(shape, platformType.getDensity());
+        body.setGravityScale(Constants.NINJA_GRAVITY_SCALE /2);
         body.resetMassData();
         PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight());
         body.setUserData(userData);
