@@ -14,6 +14,7 @@ import com.gobacca.utils.Constants;
 public class Enemy extends GameActor
 {
 	private Animation animation;
+	private static TextureAtlas textureAtlas;
     private float stateTime;
     private Body body;
     private boolean deleteFlag;
@@ -26,7 +27,7 @@ public class Enemy extends GameActor
         super(b);
         body = b;
         
-        TextureAtlas textureAtlas = new TextureAtlas(Constants.ENEMY_ATLAS_PATH);
+        textureAtlas = new TextureAtlas(Constants.ENEMY_ATLAS_PATH);
         TextureRegion[] runningFrames = new TextureRegion[getUserData().getTextureRegions().length];
         
         for (int i = 0; i < getUserData().getTextureRegions().length; i++)
@@ -109,5 +110,9 @@ public class Enemy extends GameActor
     public void setBodyNull()
     {
     	body = null;
+    }
+    
+    public static void dispose() {
+    	textureAtlas.dispose();
     }
 }

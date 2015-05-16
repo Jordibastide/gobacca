@@ -98,8 +98,8 @@ public class GameScreen implements Screen
     public void dispose()
     {
     	stage.dispose();
-    	AudioUtils.disposeAudio();
-    	AudioUtils.disposeSound();
+    	//AudioUtils.disposeAudio();
+    	//AudioUtils.disposeSound();
     }
 
 }
