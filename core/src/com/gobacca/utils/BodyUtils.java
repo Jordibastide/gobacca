@@ -15,7 +15,7 @@ public class BodyUtils
 			case NINJA:
 				return (body.getPosition().y >= 0f);
 			case ENEMY:
-				return (body.getPosition().x + userData.getWidth() / 2 > 0) && (body.getPosition().y >= 0f);
+				return (body.getPosition().x + userData.getWidth() / 2 > 0) && (body.getPosition().y >= -5f);
 			case GROUND:
 			case SHURIKEN:
 			case PLATFORM:

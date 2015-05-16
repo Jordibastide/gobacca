@@ -520,14 +520,6 @@ public class GameStage extends Stage implements ContactListener
         	deleteShuriken(a);
         	hitEnemy(b);
         }
-        else if (BodyUtils.bodyIsShuriken(a) && BodyUtils.bodyIsPlatform(b))
-        {
-        	deleteShuriken(a);
-        }
-        else if (BodyUtils.bodyIsPlatform(a) && BodyUtils.bodyIsShuriken(b))
-        {
-        	deleteShuriken(b);
-        }
         else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsGround(b)) || (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsNinja(b)))
         {
         	ninja.landed();
