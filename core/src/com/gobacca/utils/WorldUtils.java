@@ -79,11 +79,11 @@ public class WorldUtils {
         return body;
     }
     
-    public static Body createAmmo(World world)
+    public static Body createAmmo(World world, float x)
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(new Vector2(10 , 5));
+        bodyDef.position.set(new Vector2(x , 0.5f));
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
         Body body = world.createBody(bodyDef);
