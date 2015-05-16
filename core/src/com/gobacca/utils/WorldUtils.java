@@ -77,4 +77,20 @@ public class WorldUtils {
         shape.dispose();
         return body;
     }
+    
+    public static Body createAmmo(World world)
+    {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(new Vector2(10 , 5));
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
+        Body body = world.createBody(bodyDef);
+        body.setGravityScale(Constants.AMMO_GRAVITY_SCALE);
+        body.createFixture(shape, Constants.AMMO_DENSITY);
+        body.resetMassData();
+        body.setUserData(new AmmoUserData(Constants.SHURIKEN_WIDTH, Constants.SHURIKEN_HEIGHT));
+        shape.dispose();
+        return body;
+    }
 }

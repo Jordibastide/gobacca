@@ -37,6 +37,7 @@ public class Constants
     public static final int NB_SHURIKEN_NINJA_AT_START = 500;
     
     // Shuriken
+    public static final String SHURIKEN_IMAGE_PATH = "shuriken.png";
     public static final String SHURIKEN_ATLAS_PATH = "shuriken_pos.txt";
     public static final String[] SHURIKEN_REGION_NAMES = new String[] {	"shuriken_pos_0", "shuriken_pos_1", "shuriken_pos_2",
     																			"shuriken_pos_3", "shuriken_pos_4", "shuriken_pos_5"};
@@ -45,6 +46,11 @@ public class Constants
     public static final float SHURIKEN_GRAVITY_SCALE = 0f;
     public static float SHURIKEN_DENSITY = 0.5f;
     public static final Vector2 SHURIKEN_LINEAR_IMPULSE = new Vector2(10f, 0);
+    
+    // Ammo
+    public static final float AMMO_GRAVITY_SCALE = 1f;
+    public static final float AMMO_DENSITY = 1f;
+    public static final Vector2 AMMO_LINEAR_VELOCITY = new Vector2(-10f, -5f);
     
     // Enemies
     public static final float ENEMY_X = 25f;

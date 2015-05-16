@@ -122,6 +122,12 @@ public class Ninja extends GameActor
     	}
     }
     
+    public void addAmmo()
+    {
+    	// body.applyLinearImpulse(getUserData().getAmmoLinearImpulse(), body.getWorldCenter(), true);
+    	++nb_shuriken;
+    }
+    
     public float getY()
     {
     	return (pos_y / 30) + (1.2f * (1 - pos_y / 120));
