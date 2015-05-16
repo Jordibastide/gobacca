@@ -15,6 +15,7 @@ public class Enemy extends GameActor
     private float stateTime;
     private Body body;
     private boolean deleteFlag;
+    private int max_hp;
     private int current_hp;
 
     public Enemy(Body b)
@@ -64,9 +65,19 @@ public class Enemy extends GameActor
     	return body;
     }
     
+    public void setMaxHP(int hp)
+    {
+    	max_hp = hp;
+    }
+    
     public void setHP(int hp)
     {
     	current_hp = hp;
+    }
+    
+    public int getMaxHP()
+    {
+    	return max_hp;
     }
     
     public void hit()
