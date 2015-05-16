@@ -80,7 +80,7 @@ public class WorldUtils {
         body.createFixture(shape, platformType.getDensity());
         body.setGravityScale(Constants.NINJA_GRAVITY_SCALE);
         body.resetMassData();
-        PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight());
+        PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight(), platformType.getFilePath());
         body.setUserData(userData);
         shape.dispose();
         return body;
@@ -97,7 +97,7 @@ public class WorldUtils {
         body.createFixture(shape, platformType.getDensity());
         body.setGravityScale(Constants.NINJA_GRAVITY_SCALE);
         body.resetMassData();
-        PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight());
+        PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight(), platformType.getFilePath());
         body.setUserData(userData);
         shape.dispose();
         return body;
