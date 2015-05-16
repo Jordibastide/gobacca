@@ -21,7 +21,7 @@ public class Ninja extends GameActor
     private float stateTime;
     
     // Caracteristiques personnage
-    int nb_shuriken;
+    static int nb_shuriken;
     float pos_x;
     float pos_y;
 
@@ -122,7 +122,7 @@ public class Ninja extends GameActor
         return hit;
     }
     
-    public int getNbShuriken()
+    public static int getNbShuriken()
     {
     	return nb_shuriken;
     }

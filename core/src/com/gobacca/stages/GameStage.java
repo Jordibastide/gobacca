@@ -40,6 +40,7 @@ public class GameStage extends Stage implements ContactListener
     private Rectangle screenLeftSide;
     
     private Score score;
+    private ScoreShuriken scoreShuriken;
 
     private static final int NB_BUTTONS = 3;
     private Button[] buttons;
@@ -77,6 +78,7 @@ public class GameStage extends Stage implements ContactListener
         createEnemy();
         initButtons();
         initScore();
+        initScoreShuriken();
     }
     
     private void initBackground()
@@ -139,9 +141,15 @@ public class GameStage extends Stage implements ContactListener
     }
     
     private void initScore() {
-        Rectangle scoreBounds = new Rectangle(getCamera().viewportWidth / 4, getCamera().viewportHeight - 20, getCamera().viewportWidth / 4, getCamera().viewportHeight / 8);
+        Rectangle scoreBounds = new Rectangle(0, 440, 128, 64);
         score = new Score(scoreBounds);
         addActor(score);
+    }
+    
+    private void initScoreShuriken() {
+        Rectangle scoreBounds = new Rectangle(280, 500, 256, 64);
+        scoreShuriken = new ScoreShuriken(scoreBounds);
+        addActor(scoreShuriken);
     }
     
     private void initTouchControlAreas()
@@ -429,7 +437,7 @@ public class GameStage extends Stage implements ContactListener
     
     private void launchShuriken()
     {
-    	if(ninja.getNbShuriken() > 0)
+    	if(Ninja.getNbShuriken() > 0)
     	{
 	    	shurikens.add(new Shuriken(WorldUtils.createShuriken(world, ninja)));
 	        addActor(shurikens.get(shurikens.size() - 1));
