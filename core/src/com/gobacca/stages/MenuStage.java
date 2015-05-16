@@ -21,7 +21,7 @@ public class MenuStage extends Stage
     
     private MenuScreen screen;
     
-    private static final int NB_BUTTONS = 5;
+    private static final int NB_BUTTONS = 4;
     private Button[] buttons;
     private Vector3 touchPoint;
     
@@ -55,8 +55,8 @@ public class MenuStage extends Stage
     	buttons[0] = new Button(Constants.PLAY_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH / 2) - (Constants.ICON_SIZE_PX / 2), (VIEWPORT_HEIGHT / 8) - (Constants.ICON_SIZE_PX / 2), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
     	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
     	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[3] = new Button(Constants.SCORE_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[4] = new Button(Constants.INFO_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), 10, Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[3] = new Button(Constants.INFO_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	//buttons[4] = new Button(Constants.INFO_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), 10, Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
     	
 		if(!screen.isMusicON())
 			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
@@ -122,11 +122,6 @@ public class MenuStage extends Stage
         	break;
         	
         	case 3:
-        		AudioUtils.getInstance().playSound(buttonSound);
-        		screen.setStage(MenuType.SCORE);
-        	break;
-        	
-        	case 4:
         		AudioUtils.getInstance().playSound(buttonSound);
         		screen.setStage(MenuType.INFO);
         	break;

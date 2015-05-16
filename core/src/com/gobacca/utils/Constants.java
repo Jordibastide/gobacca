@@ -25,7 +25,7 @@ public class Constants
     public static final float NINJA_HEIGHT = 3f;
     public static final float NINJA_GRAVITY_SCALE = 3f;
     public static float NINJA_DENSITY = 0.5f;
-    public static final Vector2 NINJA_JUMPING_LINEAR_IMPULSE = new Vector2(0, 38f); //13f
+    public static final Vector2 NINJA_JUMPING_LINEAR_IMPULSE = new Vector2(0, 45f); //13f
     public static final float NINJA_HIT_ANGULAR_IMPULSE = 10f;
     
     // Enemies
@@ -34,7 +34,13 @@ public class Constants
     //public static final float RUNNING_SHORT_ENEMY_Y = 1.5f;
     //public static final float RUNNING_LONG_ENEMY_Y = 1.8f;
     //public static final float FLYING_ENEMY_Y = 3f;
-    public static final float BERNARD_ENEMY_Y = 1.8f;
+    public static final float BERNARD_ENEMY_Y = 1.7f;
+    public static final float ROBERT_ENEMY_Y = 2.1f;
+    public static final float CHATVIOLET_ENEMY_Y = 1.3f;
+    public static final float CHATFOU_ENEMY_Y = 1.5f;
+    public static final float CHATMIGNON_ENEMY_Y = 1.8f;
+    public static final float ALPHONSE_ENEMY_Y = 2.1f;
+    public static final float HELLBOY_ENEMY_Y = 2.1f;
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Textures world
@@ -45,8 +51,7 @@ public class Constants
     public static final String GROUND_IMAGE_PATH = "ground.png";
     
     // Texture sprites
-    public static final String CHARACTERS_ATLAS_PATH = "characters.txt";
-    public static final String ENNEMY_ATLAS_PATH = "en1.txt";
+    public static final String ENEMY_ATLAS_PATH = "enemy.txt";
     public static final String NINJA_ATLAS_PATH = "ninja.txt";
     public static final String[] NINJA_RUNNING_REGION_NAMES = new String[] {"ninja_pos1", "ninja_pos2", "ninja_pos3", "ninja_pos4", "ninja_pos5", "ninja_pos6", "ninja_pos7", "ninja_pos8", "ninja_pos9", "ninja_pos10", "ninja_pos11", "ninja_pos12", "ninja_pos13", "ninja_pos14", "ninja_pos15", "ninja_pos16", "ninja_pos17"};
     public static final String NINJA_DODGING_REGION_NAME = "ninja_pos11";
@@ -60,7 +65,13 @@ public class Constants
     //public static final String[] RUNNING_WIDE_ENEMY_REGION_NAMES = new String[] {"worm_walk1", "worm_walk2"};
     //public static final String[] FLYING_SMALL_ENEMY_REGION_NAMES = new String[] {"bee_fly1", "bee_fly2"};
     //public static final String[] FLYING_WIDE_ENEMY_REGION_NAMES = new String[] {"fly_fly1", "fly_fly2"};
-    public static final String[] BERNARD_ENEMY_REGION_NAMES = new String[] {"gros1", "gros2", "gros3", "gros4", "gros5", "gros6", "gros7", "gros8"};
+    public static final String[] BERNARD_ENEMY_REGION_NAMES = new String[] {"en11", "en12", "en13", "en14", "en15", "en16", "en17", "en18"};
+    public static final String[] ROBERT_ENEMY_REGION_NAMES = new String[] {"en21", "en22", "en23", "en24", "en25", "en26", "en27", "en28"};
+    public static final String[] CHATVIOLET_ENEMY_REGION_NAMES = new String[] {"en31", "en32", "en33", "en34", "en35", "en36"};
+    public static final String[] CHATFOU_ENEMY_REGION_NAMES = new String[] {"en41", "en42", "en43", "en44", "en45", "en46", "en47", "en48"};
+    public static final String[] CHATMIGNON_ENEMY_REGION_NAMES = new String[] {"en51", "en52", "en53", "en54", "en55", "en56"};
+    public static final String[] ALPHONSE_ENEMY_REGION_NAMES = new String[] {"en61", "en62", "en63", "en64", "en65", "en66", "en67", "en68"};
+    public static final String[] HELLBOY_ENEMY_REGION_NAMES = new String[] {"en71", "en72", "en73", "en74", "en75", "en76", "en77", "en78"};
     
     // Menu
     public static final int ICON_SIZE_PX = 128;
