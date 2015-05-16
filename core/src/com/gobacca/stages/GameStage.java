@@ -141,7 +141,7 @@ public class GameStage extends Stage implements ContactListener
     }
     
     private void initScore() {
-        Rectangle scoreBounds = new Rectangle(0, 440, 128, 64);
+        Rectangle scoreBounds = new Rectangle(20, 440, 128, 64);
         score = new Score(scoreBounds);
         addActor(score);
     }

@@ -118,5 +118,5 @@ public class Constants
     public static final String GAME_MUSIC_2 = "sound/epic.mp3";
     
     //Font
-    public static final String FONT_NAME = "roboto_bold.ttf";
+    public static final String FONT_NAME = "adventure.otf";
 }

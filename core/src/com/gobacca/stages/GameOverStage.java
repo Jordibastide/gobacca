@@ -3,12 +3,16 @@ package com.gobacca.stages;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
+import com.gobacca.actors.Score;
+import com.gobacca.actors.ScoreGameover;
+import com.gobacca.actors.ScoreShuriken;
 import com.gobacca.screens.MenuScreen;
 import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
@@ -24,6 +28,7 @@ public class GameOverStage extends Stage
     private Button[] buttons;
     private Vector3 touchPoint;
     
+    private ScoreGameover scoreGameover;
     private Sound buttonSound;
     
     public GameOverStage(MenuScreen s)
@@ -34,6 +39,7 @@ public class GameOverStage extends Stage
     	
         initBackground();
         initButtons();
+        initScoreGameover();
         
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
@@ -57,6 +63,12 @@ public class GameOverStage extends Stage
 		
     	for(int i = 0; i < NB_BUTTONS; ++i)
     		addActor(buttons[i]);
+    }
+    
+    private void initScoreGameover() {
+        Rectangle scoreBounds = new Rectangle(290, 520, 384, 64);
+        scoreGameover = new ScoreGameover(scoreBounds, Score.getScore());
+        addActor(scoreGameover);
     }
     
     private void translateScreenToWorldCoordinates(int x, int y)
