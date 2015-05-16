@@ -10,8 +10,8 @@ public enum PlatformType
     PLATFORM_MEDIUM	(  10f, Constants.PLATFORM_HEIGHT, (int)RandomUtils.rangeRandom(Constants.PLATFORM_X_MIN, Constants.PLATFORM_X_MAX), 
     		(int)RandomUtils.rangeRandom(Constants.PLATFORM_Y_MIN, Constants.PLATFORM_Y_MAX), Constants.PLATFORM_DENSITY),
 	PLATFORM_LONG	(  12f, Constants.PLATFORM_HEIGHT, (int)RandomUtils.rangeRandom(Constants.PLATFORM_X_MIN, Constants.PLATFORM_X_MAX), 
-			(int)RandomUtils.rangeRandom(Constants.PLATFORM_Y_MIN, Constants.PLATFORM_Y_MAX), Constants.PLATFORM_DENSITY),
-	PLATFORM_START	(  30f, Constants.PLATFORM_HEIGHT, 0, (int)Constants.PLATFORM_Y_MIN, Constants.PLATFORM_DENSITY);
+			(int)RandomUtils.rangeRandom(Constants.PLATFORM_Y_MIN, Constants.PLATFORM_Y_MAX), Constants.PLATFORM_DENSITY);
+	
 
     private float width;
     private float height;

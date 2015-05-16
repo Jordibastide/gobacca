@@ -9,6 +9,7 @@ import com.gobacca.actors.Ninja;
 import com.gobacca.box2d.*;
 import com.gobacca.enums.EnemyType;
 import com.gobacca.enums.PlatformType;
+import com.gobacca.enums.StartPlatformType;
 
 public class WorldUtils {
 
@@ -90,7 +91,7 @@ public class WorldUtils {
         shape.setAsBox(platformType.getWidth() / 2, platformType.getHeight() / 2);
         Body body = world.createBody(bodyDef);
         body.createFixture(shape, platformType.getDensity());
-        body.setGravityScale(Constants.NINJA_GRAVITY_SCALE /2);
+        body.setGravityScale(Constants.NINJA_GRAVITY_SCALE);
         body.resetMassData();
         PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight());
         body.setUserData(userData);
@@ -99,7 +100,7 @@ public class WorldUtils {
     }
 
 	public static Body createStartPlatform(World world) {
-		PlatformType platformType = PlatformType.PLATFORM_START;
+		StartPlatformType platformType = StartPlatformType.PLATFORM_START;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(new Vector2(platformType.getX(), platformType.getY()));
@@ -107,7 +108,7 @@ public class WorldUtils {
         shape.setAsBox(platformType.getWidth() / 2, platformType.getHeight() / 2);
         Body body = world.createBody(bodyDef);
         body.createFixture(shape, platformType.getDensity());
-        body.setGravityScale(Constants.NINJA_GRAVITY_SCALE /2);
+        body.setGravityScale(Constants.NINJA_GRAVITY_SCALE);
         body.resetMassData();
         PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight());
         body.setUserData(userData);

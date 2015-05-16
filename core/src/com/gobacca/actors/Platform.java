@@ -40,7 +40,7 @@ public class Platform extends GameActor
     public void draw(Batch batch, float parentAlpha)
     {
         super.draw(batch, parentAlpha);
-        batch.draw(textureRegion, (screenRectangle.x - (screenRectangle.width * 0.1f)), screenRectangle.y, screenRectangle.width * 1.2f, screenRectangle.height * 1.1f);
+        batch.draw(textureRegion, screenRectangle.x, screenRectangle.y, screenRectangle.width, screenRectangle.height);
     }
     
     public Body getBody()

@@ -27,7 +27,6 @@ public class GameStage extends Stage implements ContactListener
     private float accumulator = 0f;
 
     private World world;
-    private Ground ground;
     private Ninja ninja;
     private ArrayList<Enemy> enemies;
     private ArrayList<Platform> platforms;
@@ -48,8 +47,8 @@ public class GameStage extends Stage implements ContactListener
     	
     	screen = s;
     	
-    	initEnemies();
     	initPlatforms();
+    	initEnemies();
     	initShurikens();
         initWorld();
         initCamera();
@@ -61,13 +60,12 @@ public class GameStage extends Stage implements ContactListener
     	world = WorldUtils.createWorld();
         world.setContactListener(this);
         initBackground();
-        
-        createEnemy();
-        //createStartPlatform();
-        createPlatform(0);
-        createPlatform(1);
+         
+        createStartPlatform();
         createPlatform(2);
         createPlatform(3);
+        
+        createEnemy();
         
         initNinja();
 
@@ -77,12 +75,6 @@ public class GameStage extends Stage implements ContactListener
     private void initBackground()
     {
         addActor(new Background());
-    }
-
-    private void initGround()
-    {
-        ground = new Ground(WorldUtils.createGround(world));
-        addActor(ground);
     }
 
     private void initNinja()
@@ -270,22 +262,22 @@ public class GameStage extends Stage implements ContactListener
     	    	}
             }
             
-//            else if(BodyUtils.bodyIsPlatform(body))
-//            {
-//            	int i = 0;
-//    	    	while(i < platforms.size() && !body.equals(platforms.get(i).getBody()))
-//    	    	{
-//    	    		++i;
-//    	    	}
-//    	    	
-//    	    	if(i < platforms.size())
-//    	    	{
-//    	    		createPlatform(3);
-//    	    		// suppr body de la classe
-//    	    		platforms.get(i).setBodyNull();
-//    	    		platforms.remove(platforms.get(i));
-//    	    	}
-//            }
+            else if(BodyUtils.bodyIsPlatform(body))
+            {
+            	int i = 0;
+    	    	while(i < platforms.size() && !body.equals(platforms.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < platforms.size())
+    	    	{
+    	    		createPlatform(3);
+    	    		// suppr body de la classe
+    	    		platforms.get(i).setBodyNull();
+    	    		platforms.remove(platforms.get(i));
+    	    	}
+            }
             
             world.destroyBody(body);
         }
