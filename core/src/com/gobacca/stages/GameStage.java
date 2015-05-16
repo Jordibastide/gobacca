@@ -1,7 +1,9 @@
 package com.gobacca.stages;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -143,6 +145,8 @@ public class GameStage extends Stage implements ContactListener
         {
             update(body);
         }
+        
+        keyboardEventManager();
 
         // Fix timestep
         accumulator += delta;
@@ -213,6 +217,42 @@ public class GameStage extends Stage implements ContactListener
         }
 
         return super.touchDown(x, y, pointer, button);
+    }
+    
+    private void keyboardEventManager()
+    {
+    	if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+    		ninja.jump();
+    	
+    	if(Gdx.input.isKeyJustPressed(Input.Keys.E))
+    		launchShuriken();
+    	
+    	if(Gdx.input.isKeyJustPressed(Input.Keys.S))
+    		if(screen.isSoundON())
+    		{
+    			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
+    			screen.setSoundState(false);
+    		}
+    		else
+    		{
+    			buttons[2].setTexture(Constants.SOUND_1_BUTTON_IMAGE_PATH);
+    			screen.setSoundState(true);
+    		}
+    	
+    	if(Gdx.input.isKeyJustPressed(Input.Keys.M))
+    		if(screen.isMusicON())
+    		{
+    			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
+    			screen.setMusicState(false);
+    		}
+    		else
+    		{
+    			buttons[1].setTexture(Constants.MUSIC_1_BUTTON_IMAGE_PATH);
+    			screen.setMusicState(true);
+    		}
+    	
+    	if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+    		screen.setMainMenuStage();
     }
 
     private boolean rightSideTouched(float x, float y)
