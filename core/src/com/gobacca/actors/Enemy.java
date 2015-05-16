@@ -3,10 +3,12 @@ package com.gobacca.actors;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.gobacca.box2d.EnemyUserData;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
 
 public class Enemy extends GameActor
@@ -17,6 +19,7 @@ public class Enemy extends GameActor
     private boolean deleteFlag;
     private int max_hp;
     private int current_hp;
+    private Sound shurikenhitSound;
 
     public Enemy(Body b)
     {
@@ -35,6 +38,7 @@ public class Enemy extends GameActor
         stateTime = 0f;
         
         deleteFlag = false;
+        shurikenhitSound = AudioUtils.getInstance().getShurikenhitSound();
     }
 
     @Override
@@ -83,6 +87,8 @@ public class Enemy extends GameActor
     public void hit()
     {
     	--current_hp;
+    	AudioUtils.getInstance().playSound(shurikenhitSound);
+    	
     	
     	if(current_hp <= 0)
     	{

@@ -27,6 +27,7 @@ public class Ninja extends GameActor
 
     private Sound jumpSound;
     private Sound hitSound;
+    private Sound shurikenSound;
     private Sound gameoverSound;
 
 	
@@ -48,6 +49,7 @@ public class Ninja extends GameActor
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
          jumpSound = AudioUtils.getInstance().getJumpSound();
          hitSound = AudioUtils.getInstance().getHitSound();
+         shurikenSound = AudioUtils.getInstance().getShurikenSound();
          gameoverSound = AudioUtils.getInstance().getGameoverSound();
          
          initCharacter();
@@ -132,6 +134,7 @@ public class Ninja extends GameActor
     	if(nb_shuriken > 0)
     	{
     		--nb_shuriken;
+    		AudioUtils.getInstance().playSound(shurikenSound);
     	}
     }
     

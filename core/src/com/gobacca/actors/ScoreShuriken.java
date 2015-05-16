@@ -32,7 +32,7 @@ public class ScoreShuriken extends Actor {
         if (getScore() == 0) {
             return;
         }
-        font.drawWrapped(batch, String.format("%d shuriken, Ninja !", getScore()), bounds.x, bounds.y, bounds.width, BitmapFont.HAlignment.RIGHT);
+        font.drawWrapped(batch, String.format("%d shurikens, Ninja !", getScore()), bounds.x, bounds.y, bounds.width, BitmapFont.HAlignment.RIGHT);
     }
 
     public int getScore() {
