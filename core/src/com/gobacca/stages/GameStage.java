@@ -431,7 +431,7 @@ public class GameStage extends Stage implements ContactListener
     {
     	if(ninja.getNbShuriken() > 0)
     	{
-	    	shurikens.add(new Shuriken(WorldUtils.createShuriken(world, ninja)));
+	    	shurikens.add(new Shuriken(WorldUtils.createShuriken(world, ninja.getBody().getWorldCenter().x + 0.5f, ninja.getBody().getWorldCenter().y)));
 	        addActor(shurikens.get(shurikens.size() - 1));
 	        
 	        shurikens.get(shurikens.size() - 1).launchShuriken();
@@ -539,32 +539,6 @@ public class GameStage extends Stage implements ContactListener
     {
 
     }
-    
-    /*
-	private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;		// This will be our viewport measurements while working with the debug renderer
-    private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
-    
-    private GameScreen screen;
-    
-    private final float TIME_STEP = 1 / 300f;
-    private float accumulator = 0f;
-
-    private World world;
-    private Ground ground;
-    private Ninja ninja;
-    private ArrayList<Enemy> enemies;
-    private ArrayList<Shuriken> shurikens;
-    private ArrayList<Ammo> ammos;
-
-    private OrthographicCamera camera;
-    
-    private Rectangle screenRightSide;
-    private Rectangle screenLeftSide;
-
-    private static final int NB_BUTTONS = 3;
-    private Button[] buttons;
-    private Vector3 touchPoint;
-     */
     
     @Override
     public void dispose()

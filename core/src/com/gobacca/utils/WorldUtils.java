@@ -45,11 +45,11 @@ public class WorldUtils {
         return body;
     }
     
-    public static Body createShuriken(World world, Ninja ninja)
+    public static Body createShuriken(World world, float x, float y)
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(new Vector2(Constants.NINJA_X + Constants.SHURIKEN_WIDTH + 0.55f, ninja.getY()));
+        bodyDef.position.set(new Vector2(x, y));
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
         Body body = world.createBody(bodyDef);
@@ -83,7 +83,7 @@ public class WorldUtils {
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(new Vector2(x , 0.5f));
+        bodyDef.position.set(new Vector2(x , 1.5f));
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
         Body body = world.createBody(bodyDef);

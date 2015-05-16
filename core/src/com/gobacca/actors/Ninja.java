@@ -19,6 +19,7 @@ public class Ninja extends GameActor
     private TextureRegion jumpingTexture;
     private TextureRegion hitTexture;
     private float stateTime;
+    private Body body;
     
     // Caracteristiques personnage
     int nb_shuriken;
@@ -30,9 +31,10 @@ public class Ninja extends GameActor
     private Sound gameoverSound;
 
 	
-    public Ninja(Body body)
+    public Ninja(Body b)
     {
-    	 super(body);
+    	 super(b);
+    	 body = b;
     	 
          TextureAtlas textureAtlas = new TextureAtlas(Constants.NINJA_ATLAS_PATH);
          TextureRegion[] runningFrames = new TextureRegion[Constants.NINJA_RUNNING_REGION_NAMES.length];
@@ -141,8 +143,22 @@ public class Ninja extends GameActor
     	++nb_shuriken;
     }
     
-    public float getY()
+    public Body getBody()
     {
-    	return (pos_y / 30) + (1.2f * (1 - pos_y / 120));
+    	return body;
+    }
+    
+    protected void finalize() throws Throwable
+    {
+        runningAnimation = null;
+        jumpingTexture = null;
+        hitTexture = null;
+        body = null;
+        
+        jumpSound = null;
+        hitSound = null;
+        gameoverSound = null;
+
+        super.finalize();
     }
 }
