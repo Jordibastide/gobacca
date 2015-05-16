@@ -75,23 +75,13 @@ public class GameStage extends Stage implements ContactListener
         createPlatform(2);
         createPlatform(3);
         createPlatform(4);
-        
-<<<<<<< HEAD
+
         createEnemy();
         
         initNinja();
-
-        //AudioUtils.getInstance().init();
-        buttonSound = AudioUtils.getInstance().getButtonSound();
-        //screen.setMusicState(true);
-
-=======
+        
         buttonSound = AudioUtils.getInstance().getButtonSound();
         
-        initGround();
-        initNinja();
-        createEnemy();
->>>>>>> hud-shuriken
         initButtons();
         initScore();
         initScoreShuriken();

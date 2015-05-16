@@ -157,7 +157,6 @@ public class Ninja extends GameActor
         
         jumpSound = null;
         hitSound = null;
-        gameoverSound = null;
 
         super.finalize();
     }
