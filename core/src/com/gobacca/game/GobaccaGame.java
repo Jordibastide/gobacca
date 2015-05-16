@@ -46,7 +46,7 @@ public class GobaccaGame extends Game
     		AudioUtils.getInstance().playMusic();
     	}
     	else{
-    		AudioUtils.getInstance().stopMusic();
+    		AudioUtils.getInstance().pauseMusic();
     	}
     }
     

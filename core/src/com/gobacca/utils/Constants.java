@@ -79,7 +79,7 @@ public class Constants
     public static final String MENU_BACKGROUND_IMAGE_PATH = "bg_menu.png";
     
     // Game over
-    public static final String OVER_BACKGROUND_IMAGE_PATH = "game_over.jpg";
+    public static final String OVER_BACKGROUND_IMAGE_PATH = "game_over.png";
     
 	// Info
     public static final String CREDITS_BACKGROUND_IMAGE_PATH = "credits.png";
@@ -90,7 +90,10 @@ public class Constants
     //Sounds
     public static final String RUNNER_JUMPING_SOUND = "jump.wav";
     public static final String RUNNER_HIT_SOUND = "hit.wav";
-    public static final String GAME_MUSIC = "fun_in_a_bottle.mp3";
+    public static final String GAME_OVER_SOUND = "gameover.mp3";
+    public static final String BUTTON_SOUND = "button.mp3";
+    public static final String GAME_MUSIC = "tropic.mp3";
+    public static final String GAME_MUSIC_2 = "epic.mp3";
     
     //Font
     public static final String FONT_NAME = "roboto_bold.ttf";

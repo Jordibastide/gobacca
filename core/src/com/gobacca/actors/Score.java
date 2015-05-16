@@ -22,7 +22,7 @@ public class Score extends Actor {
         setWidth(bounds.width);
         setHeight(bounds.height);
         score = 0;
-        multiplier = 5;
+        multiplier = 10;
         parameter.size = 36;
         font = generator.generateFont(parameter);
         font.setColor(.21f, .22f, .21f, 1f);

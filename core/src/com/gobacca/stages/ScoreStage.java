@@ -1,6 +1,7 @@
 package com.gobacca.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -23,6 +24,8 @@ public class ScoreStage extends Stage
     private Button[] buttons;
     private Vector3 touchPoint;
     
+    private Sound buttonSound;
+    
     public ScoreStage(MenuScreen s)
     {
     	super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
@@ -34,6 +37,7 @@ public class ScoreStage extends Stage
         
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
+        buttonSound = Gdx.audio.newSound(Gdx.files.internal(Constants.BUTTON_SOUND));
     }
     
     private void initBackground()
@@ -71,7 +75,10 @@ public class ScoreStage extends Stage
         
         int i = 0;
         while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
+        {
+        	buttonSound.play();
         	++i;
+        }
         
         switch(i)
         {

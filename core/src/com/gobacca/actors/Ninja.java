@@ -22,6 +22,7 @@ public class Ninja extends GameActor
     
     private Sound jumpSound;
     private Sound hitSound;
+    private Sound gameoverSound;
 	
     public Ninja(Body body)
     {
@@ -39,6 +40,7 @@ public class Ninja extends GameActor
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
          jumpSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_JUMPING_SOUND));
          hitSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_HIT_SOUND));
+         gameoverSound = Gdx.audio.newSound(Gdx.files.internal(Constants.GAME_OVER_SOUND));
     }
     
     @Override
@@ -94,6 +96,7 @@ public class Ninja extends GameActor
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
         hitSound.play();
+        gameoverSound.play();
     }
 
     public boolean isHit()
@@ -104,6 +107,7 @@ public class Ninja extends GameActor
     public void dispose() {
         jumpSound.dispose();
         hitSound.dispose();
+        gameoverSound.dispose();
     }
 
 }

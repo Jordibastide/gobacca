@@ -1,6 +1,7 @@
 package com.gobacca.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -36,6 +37,8 @@ public class GameStage extends Stage implements ContactListener
     private static final int NB_BUTTONS = 3;
     private Button[] buttons;
     private Vector3 touchPoint;
+    
+    private Sound buttonSound;
 
     public GameStage(GameScreen s)
     {
@@ -46,6 +49,7 @@ public class GameStage extends Stage implements ContactListener
         initWorld();
         initCamera();
         initTouchControlAreas();
+        buttonSound = Gdx.audio.newSound(Gdx.files.internal(Constants.BUTTON_SOUND));
     }
 
     private void initWorld()
@@ -53,6 +57,10 @@ public class GameStage extends Stage implements ContactListener
     	world = WorldUtils.createWorld();
         world.setContactListener(this);
         initBackground();
+        
+        AudioUtils.getInstance().init();
+        screen.setMusicState(true);
+        
         initGround();
         initNinja();
         createEnemy();
@@ -151,7 +159,10 @@ public class GameStage extends Stage implements ContactListener
     	
     	int i = 0;
         while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
+        {
+        	buttonSound.play();
         	++i;
+        }
         
         switch(i)
         {
@@ -231,6 +242,7 @@ public class GameStage extends Stage implements ContactListener
         if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsEnemy(b)) || (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsNinja(b)))
         {
             ninja.hit();
+            AudioUtils.disposeAudio();
             screen.launchGameOver();
         }
         else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsGround(b)) || (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsNinja(b)))
