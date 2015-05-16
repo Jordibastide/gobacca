@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.audio.Sound;
 import com.gobacca.box2d.NinjaUserData;
+import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
 
 public class Ninja extends GameActor
@@ -17,17 +19,24 @@ public class Ninja extends GameActor
     private TextureRegion jumpingTexture;
     private TextureRegion hitTexture;
     private float stateTime;
+    private Body body;
     
     // Caracteristiques personnage
     int nb_shuriken;
     float pos_x;
     float pos_y;
+
+    private Sound jumpSound;
+    private Sound hitSound;
+    private Sound gameoverSound;
+
 	
-    public Ninja(Body body)
+    public Ninja(Body b)
     {
-    	 super(body);
+    	 super(b);
+    	 body = b;
     	 
-         TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
+         TextureAtlas textureAtlas = new TextureAtlas(Constants.NINJA_ATLAS_PATH);
          TextureRegion[] runningFrames = new TextureRegion[Constants.NINJA_RUNNING_REGION_NAMES.length];
          for (int i = 0; i < Constants.NINJA_RUNNING_REGION_NAMES.length; i++)
          {
@@ -35,10 +44,13 @@ public class Ninja extends GameActor
              runningFrames[i] = textureAtlas.findRegion(path);
          }
          
-         runningAnimation = new Animation(0.1f, runningFrames);
+         runningAnimation = new Animation(0.05f, runningFrames);
          stateTime = 0f;
          jumpingTexture = textureAtlas.findRegion(Constants.NINJA_JUMPING_REGION_NAME);
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
+         jumpSound = AudioUtils.getInstance().getJumpSound();
+         hitSound = AudioUtils.getInstance().getHitSound();
+         gameoverSound = AudioUtils.getInstance().getGameoverSound();
          
          initCharacter();
     }
@@ -90,6 +102,7 @@ public class Ninja extends GameActor
         {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
             jumping = true;
+            AudioUtils.getInstance().playSound(jumpSound);
         }
     }
 
@@ -102,6 +115,8 @@ public class Ninja extends GameActor
     {
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
+        AudioUtils.getInstance().playSound(hitSound);
+        AudioUtils.getInstance().playSound(gameoverSound);
     }
 
     public boolean isHit()
@@ -122,9 +137,28 @@ public class Ninja extends GameActor
     	}
     }
     
-    public float getY()
+    public void addAmmo()
     {
-    	return (pos_y / 30) + (1.2f * (1 - pos_y / 120));
+    	// body.applyLinearImpulse(getUserData().getAmmoLinearImpulse(), body.getWorldCenter(), true);
+    	++nb_shuriken;
     }
+    
+    public Body getBody()
+    {
+    	return body;
+    }
+    
+    protected void finalize() throws Throwable
+    {
+        runningAnimation = null;
+        jumpingTexture = null;
+        hitTexture = null;
+        body = null;
+        
+        jumpSound = null;
+        hitSound = null;
+        gameoverSound = null;
 
+        super.finalize();
+    }
 }

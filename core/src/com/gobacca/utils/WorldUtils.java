@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.gobacca.actors.Ninja;
 import com.gobacca.box2d.*;
 import com.gobacca.enums.EnemyType;
 import com.gobacca.enums.PlatformType;
@@ -16,19 +15,6 @@ public class WorldUtils {
     public static World createWorld()
     {
         return new World(Constants.WORLD_GRAVITY, true);
-    }
-
-    public static Body createGround(World world)
-    {
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(new Vector2(Constants.GROUND_X, Constants.GROUND_Y));
-        Body body = world.createBody(bodyDef);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Constants.GROUND_WIDTH / 2, Constants.GROUND_HEIGHT / 2);
-        body.createFixture(shape, Constants.GROUND_DENSITY);
-        body.setUserData(new GroundUserData(Constants.GROUND_WIDTH, Constants.GROUND_HEIGHT));
-        shape.dispose();
-        return body;
     }
     
     public static Body createNinja(World world)
@@ -47,11 +33,11 @@ public class WorldUtils {
         return body;
     }
     
-    public static Body createShuriken(World world, Ninja ninja)
+    public static Body createShuriken(World world, float x, float y)
     {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(new Vector2(Constants.NINJA_X + Constants.SHURIKEN_WIDTH + 0.55f, ninja.getY()));
+        bodyDef.position.set(new Vector2(x, y));
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
         Body body = world.createBody(bodyDef);
@@ -63,9 +49,10 @@ public class WorldUtils {
         return body;
     }
     
-    public static Body createEnemy(World world)
+    public static Body createEnemy(World world, int[] hp)
     {
         EnemyType enemyType = RandomUtils.getRandomEnemyType();
+        hp[0] = enemyType.getHP();
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(new Vector2(enemyType.getX(), enemyType.getY()));
@@ -115,4 +102,20 @@ public class WorldUtils {
         shape.dispose();
         return body;
 	}
+
+    public static Body createAmmo(World world, float x)
+    {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(new Vector2(x , 1.5f));
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(Constants.SHURIKEN_WIDTH / 2, Constants.SHURIKEN_HEIGHT / 2);
+        Body body = world.createBody(bodyDef);
+        body.setGravityScale(Constants.AMMO_GRAVITY_SCALE);
+        body.createFixture(shape, Constants.AMMO_DENSITY);
+        body.resetMassData();
+        body.setUserData(new AmmoUserData(Constants.SHURIKEN_WIDTH, Constants.SHURIKEN_HEIGHT));
+        shape.dispose();
+        return body;
+    }
 }

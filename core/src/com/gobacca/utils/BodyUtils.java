@@ -19,6 +19,7 @@ public class BodyUtils
 			case SHURIKEN:
 			case PLATFORM:
 				return body.getPosition().x + userData.getWidth() / 2 > 0;
+			case AMMO:
 		}
 		
 		return true;
@@ -54,4 +55,9 @@ public class BodyUtils
         return userData != null && userData.getUserDataType() == UserDataType.PLATFORM;
     }
 
+    public static boolean bodyIsAmmo(Body body)
+    {
+        UserData userData = (UserData) body.getUserData();
+        return userData != null && userData.getUserDataType() == UserDataType.AMMO;
+    }
 }

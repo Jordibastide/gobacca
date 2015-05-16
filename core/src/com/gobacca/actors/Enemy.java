@@ -15,13 +15,15 @@ public class Enemy extends GameActor
     private float stateTime;
     private Body body;
     private boolean deleteFlag;
+    private int max_hp;
+    private int current_hp;
 
     public Enemy(Body b)
     {
         super(b);
         body = b;
         
-        TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
+        TextureAtlas textureAtlas = new TextureAtlas(Constants.ENEMY_ATLAS_PATH);
         TextureRegion[] runningFrames = new TextureRegion[getUserData().getTextureRegions().length];
         
         for (int i = 0; i < getUserData().getTextureRegions().length; i++)
@@ -55,12 +57,37 @@ public class Enemy extends GameActor
     {
         super.draw(batch, parentAlpha);
         stateTime += Gdx.graphics.getDeltaTime();
-        batch.draw(animation.getKeyFrame(stateTime, true), (screenRectangle.x - (screenRectangle.width * 0.1f)), screenRectangle.y, screenRectangle.width * 1.2f, screenRectangle.height * 1.1f);
+        batch.draw(animation.getKeyFrame(stateTime, true), (screenRectangle.x - (screenRectangle.width * 0.8f)), screenRectangle.y, screenRectangle.width * 1.8f, screenRectangle.height * 1.5f);
     }
     
     public Body getBody()
     {
     	return body;
+    }
+    
+    public void setMaxHP(int hp)
+    {
+    	max_hp = hp;
+    }
+    
+    public void setHP(int hp)
+    {
+    	current_hp = hp;
+    }
+    
+    public int getMaxHP()
+    {
+    	return max_hp;
+    }
+    
+    public void hit()
+    {
+    	--current_hp;
+    	
+    	if(current_hp <= 0)
+    	{
+    		deleteFlagON();
+    	}
     }
     
     public boolean getDeleteFlag()
@@ -76,5 +103,12 @@ public class Enemy extends GameActor
     public void setBodyNull()
     {
     	body = null;
+    }
+    
+    protected void finalize() throws Throwable
+    {
+    	animation = null;
+    	body = null;
+    	super.finalize();
     }
 }

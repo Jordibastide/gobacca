@@ -7,6 +7,7 @@ public enum UserDataType
     NINJA,
     ENEMY,
     SHURIKEN, 
-    PLATFORM
+    PLATFORM,
+    AMMO;
 
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.gobacca.enums.MenuType;
 import com.gobacca.game.GobaccaGame;
 import com.gobacca.stages.*;
+import com.gobacca.utils.AudioUtils;
 
 public class GameScreen implements Screen
 {
@@ -76,6 +77,8 @@ public class GameScreen implements Screen
     public void hide()
     {
     	stage.dispose();
+    	//AudioUtils.disposeAudio();
+    	//AudioUtils.disposeSound();
     }
 
     @Override
@@ -94,6 +97,8 @@ public class GameScreen implements Screen
     public void dispose()
     {
     	stage.dispose();
+    	AudioUtils.disposeAudio();
+    	AudioUtils.disposeSound();
     }
 
 }
