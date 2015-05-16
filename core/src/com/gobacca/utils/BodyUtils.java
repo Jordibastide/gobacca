@@ -13,6 +13,7 @@ public class BodyUtils
 		switch (userData.getUserDataType())
 		{
 			case NINJA:
+				return (body.getPosition().y >= 0f);
 			case ENEMY:
 				return body.getPosition().x + userData.getWidth() / 2 > 0;
 			case GROUND:

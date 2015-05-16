@@ -317,6 +317,10 @@ public class GameStage extends Stage implements ContactListener
     {
         if (!BodyUtils.bodyInBounds(body))
         {
+        	if (BodyUtils.bodyIsNinja(body))
+        	{
+        		screen.launchGameOver();
+        	}
             if (BodyUtils.bodyIsEnemy(body) && !ninja.isHit())
             {
             	int i = 0;
@@ -472,7 +476,7 @@ public class GameStage extends Stage implements ContactListener
     {
     	for(int i = 0; i < nb; ++i)
     	{
-	        ammos.add(new Ammo(WorldUtils.createAmmo(world, b.getWorldCenter().x + (i * 1.5f) )));
+	        ammos.add(new Ammo(WorldUtils.createAmmo(world, b.getWorldCenter().x + (i * 1.5f),  b.getWorldCenter().y + 0.5f)));
 	        addActor(ammos.get(ammos.size() - 1));
     	}
     }
