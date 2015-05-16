@@ -13,7 +13,7 @@ public class AmmoUserData extends UserData
 	{
         super(width, height);
         userDataType = UserDataType.AMMO;
-        linearVelocity = Constants.ENEMY_LINEAR_VELOCITY;
+        linearVelocity = Constants.AMMO_LINEAR_VELOCITY;
     }
 
 	// GETTERS

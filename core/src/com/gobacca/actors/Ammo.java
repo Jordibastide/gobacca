@@ -1,6 +1,5 @@
 package com.gobacca.actors;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.gobacca.box2d.AmmoUserData;
 import com.gobacca.utils.Constants;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Ammo extends GameActor
 {
 	private TextureRegion textureRegion;
-    private Rectangle bounds;
     private Body body;
     private boolean deleteFlag;
 
@@ -22,7 +20,6 @@ public class Ammo extends GameActor
         body = b;
         
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.SHURIKEN_IMAGE_PATH)));
-        bounds = new Rectangle(0, 0, Constants.SHURIKEN_WIDTH, Constants.SHURIKEN_HEIGHT);
         
         deleteFlag = false;
     }
@@ -46,7 +43,7 @@ public class Ammo extends GameActor
     public void draw(Batch batch, float parentAlpha)
     {
         super.draw(batch, parentAlpha);
-        batch.draw(textureRegion, bounds.x, bounds.y, bounds.width, bounds.height);
+        batch.draw(textureRegion, screenRectangle.x, screenRectangle.y, screenRectangle.width, screenRectangle.height);
     }
     
     public Body getBody()

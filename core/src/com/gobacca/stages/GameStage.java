@@ -29,6 +29,7 @@ public class GameStage extends Stage implements ContactListener
     private Ninja ninja;
     private ArrayList<Enemy> enemies;
     private ArrayList<Shuriken> shurikens;
+    private ArrayList<Ammo> ammos;
 
     private OrthographicCamera camera;
     
@@ -46,6 +47,7 @@ public class GameStage extends Stage implements ContactListener
     	screen = s;
     	
     	initEnemies();
+    	initAmmos();
     	initShurikens();
         initWorld();
         initCamera();
@@ -84,6 +86,11 @@ public class GameStage extends Stage implements ContactListener
     private void initEnemies()
     {
     	enemies = new ArrayList<Enemy>();
+    }
+    
+    private void initAmmos()
+    {
+    	ammos = new ArrayList<Ammo>();
     }
     
     private void initShurikens()
@@ -234,7 +241,6 @@ public class GameStage extends Stage implements ContactListener
     	    	{
     	    		createEnemy();
     	    		
-    	    		// suppr body de la classe
     	    		enemies.get(i).setBodyNull();
     	    		enemies.remove(i);
     	    	}
@@ -249,11 +255,25 @@ public class GameStage extends Stage implements ContactListener
     	    	
     	    	if(i < shurikens.size())
     	    	{
-    	    		// suppr body de la classe
     	    		shurikens.get(i).setBodyNull();
     	    		shurikens.remove(shurikens.get(i));
     	    	}
             }
+            else if(BodyUtils.bodyIsAmmo(body))
+            {
+            	int i = 0;
+    	    	while(i < ammos.size() && !body.equals(ammos.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < ammos.size())
+    	    	{
+    	    		ammos.get(i).setBodyNull();
+    	    		ammos.remove(ammos.get(i));
+    	    	}
+            }
+            
             
             world.destroyBody(body);
         }
@@ -269,10 +289,10 @@ public class GameStage extends Stage implements ContactListener
     	    	
     	    	if(i < enemies.size() && enemies.get(i).getDeleteFlag())
     	    	{
-    	    		// suppr body de la classe
     	    		enemies.get(i).setBodyNull();
     	    		enemies.remove(i);
     	    		createEnemy();
+    	    		createAmmo();
     	    		world.destroyBody(body);
     	    	}
             }
@@ -286,9 +306,23 @@ public class GameStage extends Stage implements ContactListener
     	    	
     	    	if(i < shurikens.size() && shurikens.get(i).getDeleteFlag())
     	    	{
-    	    		// suppr body de la classe
     	    		shurikens.get(i).setBodyNull();
     	    		shurikens.remove(shurikens.get(i));
+    	    		world.destroyBody(body);
+    	    	}
+            }
+        	else if(BodyUtils.bodyIsAmmo(body))
+            {
+            	int i = 0;
+    	    	while(i < ammos.size() && !body.equals(ammos.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < ammos.size() && ammos.get(i).getDeleteFlag())
+    	    	{
+    	    		ammos.get(i).setBodyNull();
+    	    		ammos.remove(ammos.get(i));
     	    		world.destroyBody(body);
     	    	}
             }
@@ -299,6 +333,12 @@ public class GameStage extends Stage implements ContactListener
     {
         enemies.add(new Enemy(WorldUtils.createEnemy(world)));
         addActor(enemies.get(enemies.size() - 1));
+    }
+    
+    private void createAmmo()
+    {
+        ammos.add(new Ammo(WorldUtils.createAmmo(world)));
+        addActor(ammos.get(ammos.size() - 1));
     }
     
     private void launchShuriken()
@@ -325,12 +365,12 @@ public class GameStage extends Stage implements ContactListener
             ninja.hit();
             screen.launchGameOver();
         }
-        else if((BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsShuriken(b)))
+        else if(BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsShuriken(b))
         {
         	deleteShuriken(b);
         	killEnemy(a);
         }
-        else if((BodyUtils.bodyIsShuriken(a) && BodyUtils.bodyIsEnemy(b)))
+        else if(BodyUtils.bodyIsShuriken(a) && BodyUtils.bodyIsEnemy(b))
         {
         	deleteShuriken(a);
         	killEnemy(b);
@@ -339,7 +379,16 @@ public class GameStage extends Stage implements ContactListener
         {
         	ninja.landed();
         }
-
+        else if(BodyUtils.bodyIsAmmo(a) && BodyUtils.bodyIsNinja(b))
+        {
+        	ninja.addAmmo();
+        	deleteAmmo(a);
+        }
+        else if(BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsAmmo(b))
+        {
+        	ninja.addAmmo();
+        	deleteAmmo(b);
+        }
     }
     
     private void killEnemy(Body b)
@@ -364,6 +413,18 @@ public class GameStage extends Stage implements ContactListener
     	}	
     }
     
+    private void deleteAmmo(Body b)
+    {
+    	int i = 0;
+    	while(i < ammos.size() && !b.equals(ammos.get(i).getBody()))
+    		++i;
+    	
+    	if(i < ammos.size())
+    	{
+    		ammos.get(i).deleteFlagON();
+    	}
+    }
+    
     @Override
     public void endContact(Contact contact)
     {
@@ -373,7 +434,13 @@ public class GameStage extends Stage implements ContactListener
     @Override
     public void preSolve(Contact contact, Manifold oldManifold)
     {
+    	Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
 
+        if((BodyUtils.bodyIsAmmo(a) && !BodyUtils.bodyIsGround(b) && !BodyUtils.bodyIsNinja(b)) || (!BodyUtils.bodyIsGround(a) && !BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsAmmo(b)))
+        {
+        	contact.setEnabled(false);
+        }
     }
 
     @Override

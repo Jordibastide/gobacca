@@ -46,5 +46,10 @@ public class BodyUtils
         UserData userData = (UserData) body.getUserData();
         return userData != null && userData.getUserDataType() == UserDataType.GROUND;
     }
-
+    
+    public static boolean bodyIsAmmo(Body body)
+    {
+        UserData userData = (UserData) body.getUserData();
+        return userData != null && userData.getUserDataType() == UserDataType.AMMO;
+    }
 }

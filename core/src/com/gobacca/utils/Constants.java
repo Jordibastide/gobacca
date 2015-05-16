@@ -47,6 +47,11 @@ public class Constants
     public static float SHURIKEN_DENSITY = 0.5f;
     public static final Vector2 SHURIKEN_LINEAR_IMPULSE = new Vector2(10f, 0);
     
+    // Ammo
+    public static final float AMMO_GRAVITY_SCALE = 1f;
+    public static final float AMMO_DENSITY = 1f;
+    public static final Vector2 AMMO_LINEAR_VELOCITY = new Vector2(-10f, -5f);
+    
     // Enemies
     public static final float ENEMY_X = 25f;
     public static final float ENEMY_DENSITY = NINJA_DENSITY;
