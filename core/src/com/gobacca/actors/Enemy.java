@@ -15,6 +15,7 @@ public class Enemy extends GameActor
     private float stateTime;
     private Body body;
     private boolean deleteFlag;
+    private int current_hp;
 
     public Enemy(Body b)
     {
@@ -61,6 +62,21 @@ public class Enemy extends GameActor
     public Body getBody()
     {
     	return body;
+    }
+    
+    public void setHP(int hp)
+    {
+    	current_hp = hp;
+    }
+    
+    public void hit()
+    {
+    	--current_hp;
+    	
+    	if(current_hp <= 0)
+    	{
+    		deleteFlagON();
+    	}
     }
     
     public boolean getDeleteFlag()

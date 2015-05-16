@@ -61,9 +61,10 @@ public class WorldUtils {
         return body;
     }
     
-    public static Body createEnemy(World world)
+    public static Body createEnemy(World world, int[] hp)
     {
         EnemyType enemyType = RandomUtils.getRandomEnemyType();
+        hp[0] = enemyType.getHP();
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(new Vector2(enemyType.getX(), enemyType.getY()));
