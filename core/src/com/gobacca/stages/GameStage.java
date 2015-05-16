@@ -166,6 +166,8 @@ public class GameStage extends Stage implements ContactListener
         }
         
         keyboardEventManager();
+        
+        replaceNinja();
 
         // Fix timestep
         accumulator += delta;
@@ -175,6 +177,18 @@ public class GameStage extends Stage implements ContactListener
             world.step(TIME_STEP, 6, 2);
             accumulator -= TIME_STEP;
         }
+    }
+    
+    private void replaceNinja()
+    {
+    	float x = ninja.getBody().getWorldCenter().x;
+    	float y = ninja.getBody().getWorldCenter().y;
+    	
+    	if(x != Constants.NINJA_X)
+    	{
+    		//ninja.getBody().setTransform(- x, 0f, 0f);
+    		ninja.getBody().setTransform(Constants.NINJA_X, y, 0f);
+    	}
     }
     
     private void translateScreenToWorldCoordinates(int x, int y)
