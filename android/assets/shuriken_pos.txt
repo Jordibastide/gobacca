@@ -1,0 +1,46 @@
+shuriken_pos.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shuriken_pos_0
+  rotate: false
+  xy: 0, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+shuriken_pos_1
+  rotate: true
+  xy: 256, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+shuriken_pos_2
+  rotate: false
+  xy: 0, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+shuriken_pos_3
+  rotate: true
+  xy: 128, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+shuriken_pos_4
+  rotate: false
+  xy: 128, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+shuriken_pos_5
+  rotate: true
+  xy: 256, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5

@@ -1,27 +1,72 @@
 package com.gobacca.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Game;
+import com.gobacca.actors.Enemy;
+import com.gobacca.enums.MenuType;
+import com.gobacca.screens.*;
+import com.gobacca.utils.*;
 
-public class GobaccaGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class GobaccaGame extends Game
+{
+	private boolean sound_ON;
+    private boolean music_ON;
+    
+	@Override
+	public void create ()
+	{
+        sound_ON = true;
+        music_ON = true;
+        
+		setMenuScreen(MenuType.MAIN);
+	}
+	
+	public void setMenuScreen(MenuType t)
+	{
+		setScreen(new MenuScreen(this, t));
+	}
+	
+	public void setGameScreen()
+	{
+		setScreen(new GameScreen(this));
+	}
+	
+	public boolean isMusicON()
+    {
+    	return music_ON;
+    }
+    
+    public boolean isSoundON()
+    {
+    	return sound_ON;
+    }
+    
+    public void setMusicState(boolean state)
+    {
+    	music_ON = state;
+    	if(music_ON == true){
+    		AudioUtils.getInstance().playMusic();
+    	}
+    	else{
+    		AudioUtils.getInstance().pauseMusic();
+    	}
+    }
+    
+    public void setSoundState(boolean state)
+    {
+    	sound_ON = state;
+    }
+
+	@Override
+	public void render ()
+	{
+		super.render();
+	}
 	
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-	}
-
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 1, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
+    public void dispose() {
+        super.dispose();
+        AudioUtils.disposeAudio();
+        AudioUtils.disposeSound();
+        Enemy.dispose();
+    }
 }
