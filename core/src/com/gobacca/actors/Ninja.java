@@ -38,9 +38,12 @@ public class Ninja extends GameActor
          stateTime = 0f;
          jumpingTexture = textureAtlas.findRegion(Constants.NINJA_JUMPING_REGION_NAME);
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
-         jumpSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_JUMPING_SOUND));
-         hitSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_HIT_SOUND));
-         gameoverSound = Gdx.audio.newSound(Gdx.files.internal(Constants.GAME_OVER_SOUND));
+         //jumpSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_JUMPING_SOUND));
+         //hitSound = Gdx.audio.newSound(Gdx.files.internal(Constants.RUNNER_HIT_SOUND));
+         //gameoverSound = Gdx.audio.newSound(Gdx.files.internal(Constants.GAME_OVER_SOUND));
+         jumpSound = AudioUtils.getInstance().getJumpSound();
+         hitSound = AudioUtils.getInstance().getHitSound();
+         gameoverSound = AudioUtils.getInstance().getGameoverSound();
     }
     
     @Override
@@ -82,7 +85,7 @@ public class Ninja extends GameActor
         {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
             jumping = true;
-            jumpSound.play();
+            AudioUtils.getInstance().playSound(jumpSound);
         }
     }
 
@@ -95,19 +98,12 @@ public class Ninja extends GameActor
     {
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
-        hitSound.play();
-        gameoverSound.play();
+        AudioUtils.getInstance().playSound(hitSound);
+        AudioUtils.getInstance().playSound(gameoverSound);
     }
 
     public boolean isHit()
     {
         return hit;
     }
-    
-    public void dispose() {
-        jumpSound.dispose();
-        hitSound.dispose();
-        gameoverSound.dispose();
-    }
-
 }

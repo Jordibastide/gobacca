@@ -10,6 +10,8 @@ public class AudioUtils {
     private static Music music_2;
     private static Sound jumpSound;
     private static Sound hitSound;
+    private static Sound gameoverSound;
+    private static Sound buttonSound;
     
     private AudioUtils() {
     }
@@ -30,6 +32,8 @@ public class AudioUtils {
         playMusic();
         jumpSound = createSound(Constants.RUNNER_JUMPING_SOUND);
         hitSound = createSound(Constants.RUNNER_HIT_SOUND);
+        gameoverSound = createSound(Constants.GAME_OVER_SOUND);
+        buttonSound = createSound(Constants.BUTTON_SOUND);
     }
     
     public Sound createSound(String soundFileName) {
@@ -48,8 +52,13 @@ public class AudioUtils {
     public static void disposeAudio() {
         music.dispose();
         music_2.dispose();
+    }
+    
+    public static void disposeSound() {
         jumpSound.dispose();
         hitSound.dispose();
+        gameoverSound.dispose();
+        buttonSound.dispose();
     }
 
     public void pauseMusic() {
@@ -68,5 +77,13 @@ public class AudioUtils {
 
     public Sound getHitSound() {
         return hitSound;
+    }
+    
+    public Sound getGameoverSound() {
+        return gameoverSound;
+    }
+    
+    public Sound getButtonSound() {
+        return buttonSound;
     }
 }

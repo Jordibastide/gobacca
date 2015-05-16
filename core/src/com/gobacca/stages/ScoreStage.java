@@ -37,7 +37,7 @@ public class ScoreStage extends Stage
         
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
-        buttonSound = Gdx.audio.newSound(Gdx.files.internal(Constants.BUTTON_SOUND));
+        buttonSound = AudioUtils.getInstance().getButtonSound();
     }
     
     private void initBackground()
@@ -76,19 +76,20 @@ public class ScoreStage extends Stage
         int i = 0;
         while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
         {
-        	buttonSound.play();
         	++i;
         }
         
         switch(i)
         {
         	case 0:
+        		AudioUtils.getInstance().playSound(buttonSound);
         		screen.setMusicState(false);
         		AudioUtils.disposeAudio();
         		screen.setMainMenuStage();
         	break;
         	
         	case 1:
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isMusicON())
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
@@ -103,6 +104,7 @@ public class ScoreStage extends Stage
         	break;
         	
         	case 2:
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isSoundON())
         		{
         			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
