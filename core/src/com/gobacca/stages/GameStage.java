@@ -28,6 +28,7 @@ public class GameStage extends Stage implements ContactListener
     private Ground ground;
     private Ninja ninja;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Platform> platforms;
     private ArrayList<Shuriken> shurikens;
 
     private OrthographicCamera camera;
@@ -46,13 +47,14 @@ public class GameStage extends Stage implements ContactListener
     	screen = s;
     	
     	initEnemies();
+    	initPlatforms();
     	initShurikens();
         initWorld();
         initCamera();
         initTouchControlAreas();
     }
 
-    private void initWorld()
+	private void initWorld()
     {
     	world = WorldUtils.createWorld();
         world.setContactListener(this);
@@ -60,6 +62,7 @@ public class GameStage extends Stage implements ContactListener
         initGround();
         initNinja();
         createEnemy();
+        createPlatform();
         
         initButtons();
     }
@@ -85,6 +88,11 @@ public class GameStage extends Stage implements ContactListener
     {
     	enemies = new ArrayList<Enemy>();
     }
+
+    private void initPlatforms() 
+    {	
+    	platforms = new ArrayList<Platform>();
+	}
     
     private void initShurikens()
     {
@@ -255,6 +263,22 @@ public class GameStage extends Stage implements ContactListener
     	    	}
             }
             
+            else if(BodyUtils.bodyIsPlatform(body))
+            {
+            	int i = 0;
+    	    	while(i < platforms.size() && !body.equals(platforms.get(i).getBody()))
+    	    	{
+    	    		++i;
+    	    	}
+    	    	
+    	    	if(i < platforms.size())
+    	    	{
+    	    		// suppr body de la classe
+    	    		platforms.get(i).setBodyNull();
+    	    		platforms.remove(platforms.get(i));
+    	    	}
+            }
+            
             world.destroyBody(body);
         }
         else
@@ -301,6 +325,12 @@ public class GameStage extends Stage implements ContactListener
         addActor(enemies.get(enemies.size() - 1));
     }
     
+    private void createPlatform()
+    {
+        platforms.add(new Platform(WorldUtils.createPlatform(world)));
+        addActor(platforms.get(platforms.size() - 1));
+    }
+    
     private void launchShuriken()
     {
     	if(ninja.getNbShuriken() > 0)
@@ -339,6 +369,10 @@ public class GameStage extends Stage implements ContactListener
         {
         	ninja.landed();
         }
+        else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsPlatform(b)) || (BodyUtils.bodyIsPlatform(a) && BodyUtils.bodyIsNinja(b)))
+        {
+        	ninja.landed();
+        }
 
     }
     
@@ -373,7 +407,24 @@ public class GameStage extends Stage implements ContactListener
     @Override
     public void preSolve(Contact contact, Manifold oldManifold)
     {
-
+    	Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
+        
+    	if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsPlatform(b)))
+        {
+        	if (a.getLinearVelocity().y > 0)
+        		contact.setEnabled(false);
+        	else
+        		contact.setEnabled(true);
+        }
+    	
+    	if((BodyUtils.bodyIsNinja(b) && BodyUtils.bodyIsPlatform(a)))
+        {
+        	if (b.getLinearVelocity().y > 0)
+        		contact.setEnabled(false);
+        	else
+        		contact.setEnabled(true);
+        }
     }
 
     @Override

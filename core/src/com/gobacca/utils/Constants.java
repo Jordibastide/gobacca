@@ -24,8 +24,8 @@ public class Constants
     public static final float NINJA_WIDTH = 1f;
     public static final float NINJA_HEIGHT = 2f;
     public static final float NINJA_GRAVITY_SCALE = 3f;
-    public static float NINJA_DENSITY = 0.5f;
-    public static final Vector2 NINJA_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
+    public static final float NINJA_DENSITY = 0.5f;
+    public static final Vector2 NINJA_JUMPING_LINEAR_IMPULSE = new Vector2(0, 20f);
     public static final float NINJA_HIT_ANGULAR_IMPULSE = 10f;
     
     // Texture Ninja
@@ -53,6 +53,13 @@ public class Constants
     public static final float RUNNING_LONG_ENEMY_Y = 2f;
     public static final float FLYING_ENEMY_Y = 3f;
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
+    
+    // Platforms
+    public static final float PLATFORM_X = 30f;
+    public static final float PLATFORM_Y = 5f;
+    public static final float PLATFORM_HEIGHT = 1f;
+    public static final float PLATFORM_DENSITY = 0f;
+    public static final Vector2 PLATFORM_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Textures world
     public static final String BACKGROUND_IMAGE_PATH = "background.png";

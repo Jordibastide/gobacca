@@ -1,6 +1,8 @@
 package com.gobacca.utils;
 
 import com.gobacca.enums.EnemyType;
+import com.gobacca.enums.PlatformType;
+
 import java.util.Random;
 
 public class RandomUtils
@@ -9,6 +11,12 @@ public class RandomUtils
     public static EnemyType getRandomEnemyType()
     {
         RandomEnum<EnemyType> randomEnum = new RandomEnum<EnemyType>(EnemyType.class);
+        return randomEnum.random();
+    }
+    
+    public static PlatformType getRandomPlatformType()
+    {
+        RandomEnum<PlatformType> randomEnum = new RandomEnum<PlatformType>(PlatformType.class);
         return randomEnum.random();
     }
 
