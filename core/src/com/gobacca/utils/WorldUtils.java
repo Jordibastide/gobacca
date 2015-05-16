@@ -66,11 +66,12 @@ public class WorldUtils {
     {
         EnemyType enemyType = RandomUtils.getRandomEnemyType();
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(new Vector2(enemyType.getX(), enemyType.getY()));
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(enemyType.getWidth() / 2, enemyType.getHeight() / 2);
         Body body = world.createBody(bodyDef);
+        body.setGravityScale(Constants.ENEMY_GRAVITY_SCALE);
         body.createFixture(shape, enemyType.getDensity());
         body.resetMassData();
         EnemyUserData userData = new EnemyUserData(enemyType.getWidth(), enemyType.getHeight(), enemyType.getRegions());
@@ -79,9 +80,26 @@ public class WorldUtils {
         return body;
     }
     
-    public static Body createPlatform(World world)
+    public static Body createPlatform(World world, int n)
     {
         PlatformType platformType = RandomUtils.getRandomPlatformType();
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.position.set(new Vector2(platformType.getX() * n, platformType.getY()));
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(platformType.getWidth() / 2, platformType.getHeight() / 2);
+        Body body = world.createBody(bodyDef);
+        body.createFixture(shape, platformType.getDensity());
+        body.setGravityScale(Constants.NINJA_GRAVITY_SCALE /2);
+        body.resetMassData();
+        PlatformUserData userData = new PlatformUserData(platformType.getWidth(), platformType.getHeight());
+        body.setUserData(userData);
+        shape.dispose();
+        return body;
+    }
+
+	public static Body createStartPlatform(World world) {
+		PlatformType platformType = PlatformType.PLATFORM_START;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(new Vector2(platformType.getX(), platformType.getY()));
@@ -95,5 +113,5 @@ public class WorldUtils {
         body.setUserData(userData);
         shape.dispose();
         return body;
-    }
+	}
 }

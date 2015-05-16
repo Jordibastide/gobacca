@@ -1,20 +1,25 @@
 package com.gobacca.enums;
 
 import com.gobacca.utils.Constants;
+import com.gobacca.utils.RandomUtils;
 
 public enum PlatformType
 {
-	PLATFORM_SMALL	(	25f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY),
-    PLATFORM_MEDIUM	(  30f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY),
-	PLATFORM_LONG	(  55f, Constants.PLATFORM_HEIGHT, Constants.PLATFORM_X, Constants.PLATFORM_Y, Constants.PLATFORM_DENSITY);
+	PLATFORM_SMALL	(	8f, Constants.PLATFORM_HEIGHT, (int)RandomUtils.rangeRandom(Constants.PLATFORM_X_MIN, Constants.PLATFORM_X_MAX), 
+			(int)RandomUtils.rangeRandom(Constants.PLATFORM_Y_MIN, Constants.PLATFORM_Y_MAX), Constants.PLATFORM_DENSITY),
+    PLATFORM_MEDIUM	(  10f, Constants.PLATFORM_HEIGHT, (int)RandomUtils.rangeRandom(Constants.PLATFORM_X_MIN, Constants.PLATFORM_X_MAX), 
+    		(int)RandomUtils.rangeRandom(Constants.PLATFORM_Y_MIN, Constants.PLATFORM_Y_MAX), Constants.PLATFORM_DENSITY),
+	PLATFORM_LONG	(  12f, Constants.PLATFORM_HEIGHT, (int)RandomUtils.rangeRandom(Constants.PLATFORM_X_MIN, Constants.PLATFORM_X_MAX), 
+			(int)RandomUtils.rangeRandom(Constants.PLATFORM_Y_MIN, Constants.PLATFORM_Y_MAX), Constants.PLATFORM_DENSITY),
+	PLATFORM_START	(  30f, Constants.PLATFORM_HEIGHT, 0, (int)Constants.PLATFORM_Y_MIN, Constants.PLATFORM_DENSITY);
 
     private float width;
     private float height;
-    private float x;
-    private float y;
+    private int x;
+    private int y;
     private float density;
 
-    PlatformType(float width, float height, float x, float y, float density)
+    PlatformType(float width, float height, int x, int y, float density)
     {
         this.width = width;
         this.height = height;

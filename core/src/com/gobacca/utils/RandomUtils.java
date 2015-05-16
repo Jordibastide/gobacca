@@ -8,7 +8,12 @@ import java.util.Random;
 public class RandomUtils
 {
 
-    public static EnemyType getRandomEnemyType()
+    public static float rangeRandom(float lower, float upper)
+    {
+    	return (float)(Math.random() * (upper - lower)) + lower;
+    }
+	
+	public static EnemyType getRandomEnemyType()
     {
         RandomEnum<EnemyType> randomEnum = new RandomEnum<EnemyType>(EnemyType.class);
         return randomEnum.random();

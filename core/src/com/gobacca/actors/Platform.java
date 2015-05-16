@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.gobacca.box2d.PlatformUserData;
 import com.gobacca.utils.Constants;
@@ -41,7 +40,7 @@ public class Platform extends GameActor
     public void draw(Batch batch, float parentAlpha)
     {
         super.draw(batch, parentAlpha);
-        batch.draw(textureRegion, screenRectangle.x , screenRectangle.y, screenRectangle.width, screenRectangle.height);
+        batch.draw(textureRegion, (screenRectangle.x - (screenRectangle.width * 0.1f)), screenRectangle.y, screenRectangle.width * 1.2f, screenRectangle.height * 1.1f);
     }
     
     public Body getBody()

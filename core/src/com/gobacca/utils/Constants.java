@@ -16,11 +16,20 @@ public class Constants
     public static final float GROUND_Y = 0;
     public static final float GROUND_WIDTH = 50f;
     public static final float GROUND_HEIGHT = 2f;
-    public static final float GROUND_DENSITY = 0f;
+    public static final float GROUND_DENSITY = 1f;
+    
+ // Platforms
+    public static final float PLATFORM_X_MIN = 15f;
+    public static final float PLATFORM_X_MAX = 15f;
+    public static final float PLATFORM_Y_MIN = 4f;
+    public static final float PLATFORM_Y_MAX = 10f;
+    public static final float PLATFORM_HEIGHT = 1f;
+    public static final float PLATFORM_DENSITY = 1f;
+    public static final Vector2 PLATFORM_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Ninja specifies
     public static final float NINJA_X = 2;
-    public static final float NINJA_Y = GROUND_Y + GROUND_HEIGHT;
+    public static final float NINJA_Y = PLATFORM_Y_MAX + PLATFORM_HEIGHT;
     public static final float NINJA_WIDTH = 1f;
     public static final float NINJA_HEIGHT = 2f;
     public static final float NINJA_GRAVITY_SCALE = 3f;
@@ -47,19 +56,13 @@ public class Constants
     public static final Vector2 SHURIKEN_LINEAR_IMPULSE = new Vector2(10f, 0);
     
     // Enemies
-    public static final float ENEMY_X = 25f;
+    public static final float ENEMY_X = 60f;
     public static final float ENEMY_DENSITY = NINJA_DENSITY;
-    public static final float RUNNING_SHORT_ENEMY_Y = 1.5f;
-    public static final float RUNNING_LONG_ENEMY_Y = 2f;
-    public static final float FLYING_ENEMY_Y = 3f;
+    public static final float ENEMY_GRAVITY_SCALE = 50f;
+    public static final float RUNNING_SHORT_ENEMY_Y = PLATFORM_Y_MAX + 1.5f;
+    public static final float RUNNING_LONG_ENEMY_Y = PLATFORM_Y_MAX + 2f;
+    public static final float FLYING_ENEMY_Y = PLATFORM_Y_MAX + 3f;
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
-    
-    // Platforms
-    public static final float PLATFORM_X = 50f;
-    public static final float PLATFORM_Y = 5f;
-    public static final float PLATFORM_HEIGHT = 1f;
-    public static final float PLATFORM_DENSITY = 0f;
-    public static final Vector2 PLATFORM_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Textures world
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
