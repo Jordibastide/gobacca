@@ -332,7 +332,19 @@ public class GameStage extends Stage implements ContactListener
     	    		enemies.get(i).setBodyNull();
     	    		enemies.remove(i);
     	    		createEnemy();
-    	    		createAmmo();
+    	    		
+    	    		if(enemies.get(i).getMaxHP() > 1)
+    	    		{
+    	    			int higher = enemies.get(i).getMaxHP() + 1;
+    	    			int lower = 1;
+    	    			int random = (int)(Math.random() * (higher-lower)) + lower;
+	    	    		createAmmo(body, random);
+    	    		}
+    	    		else
+    	    		{
+    	    			createAmmo(body, 1);
+    	    		}
+    	    		
     	    		world.destroyBody(body);
     	    	}
             }
@@ -374,14 +386,18 @@ public class GameStage extends Stage implements ContactListener
     	int[] hp = new int[1];
     	hp[0] = 0;
         enemies.add(new Enemy(WorldUtils.createEnemy(world, hp)));
+        enemies.get(enemies.size() - 1).setMaxHP(hp[0]);
         enemies.get(enemies.size() - 1).setHP(hp[0]);
         addActor(enemies.get(enemies.size() - 1));
     }
     
-    private void createAmmo()
+    private void createAmmo(Body b, int nb)
     {
-        ammos.add(new Ammo(WorldUtils.createAmmo(world)));
-        addActor(ammos.get(ammos.size() - 1));
+    	for(int i = 0; i < nb; ++i)
+    	{
+	        ammos.add(new Ammo(WorldUtils.createAmmo(world, b.getWorldCenter().x + (i * 1.5f) )));
+	        addActor(ammos.get(ammos.size() - 1));
+    	}
     }
     
     private void launchShuriken()
@@ -480,7 +496,11 @@ public class GameStage extends Stage implements ContactListener
     	Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
 
-        if((BodyUtils.bodyIsAmmo(a) && !BodyUtils.bodyIsGround(b) && !BodyUtils.bodyIsNinja(b)) || (!BodyUtils.bodyIsGround(a) && !BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsAmmo(b)))
+        if(BodyUtils.bodyIsAmmo(a) && BodyUtils.bodyIsAmmo(b))
+        {
+        	
+        }
+        else if((BodyUtils.bodyIsAmmo(a) && !BodyUtils.bodyIsGround(b) && !BodyUtils.bodyIsNinja(b)) || (!BodyUtils.bodyIsGround(a) && !BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsAmmo(b)))
         {
         	contact.setEnabled(false);
         }

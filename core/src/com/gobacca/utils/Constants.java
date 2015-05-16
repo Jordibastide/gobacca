@@ -45,14 +45,9 @@ public class Constants
     public static final float SHURIKEN_HEIGHT = 1f;
     public static final float SHURIKEN_GRAVITY_SCALE = 0f;
     public static float SHURIKEN_DENSITY = 0.5f;
-    public static final Vector2 SHURIKEN_LINEAR_IMPULSE = new Vector2(10f, 0);
+    public static final Vector2 SHURIKEN_LINEAR_IMPULSE = new Vector2(14f, 0);
     
-    // Ammo
-    public static final float AMMO_GRAVITY_SCALE = 1f;
-    public static final float AMMO_DENSITY = 1f;
-    public static final Vector2 AMMO_LINEAR_VELOCITY = new Vector2(-10f, -5f);
-    
-    // Enemies
+	// Enemies stats
     public static final float ENEMY_X = 25f;
     public static final float ENEMY_DENSITY = NINJA_DENSITY;
     public static final float RUNNING_SHORT_ENEMY_Y = 1.5f;
@@ -60,11 +55,17 @@ public class Constants
     public static final float FLYING_ENEMY_Y = 3f;
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
+    // Ammo
+    public static final float AMMO_GRAVITY_SCALE = NINJA_GRAVITY_SCALE;
+    public static final float AMMO_DENSITY = ENEMY_DENSITY;
+    public static final Vector2 AMMO_LINEAR_VELOCITY = new Vector2(ENEMY_LINEAR_VELOCITY.x, 0f);
+    
+    
     // Textures world
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
     public static final String GROUND_IMAGE_PATH = "ground.png";
     
-    // Enemies
+    // Enemies textures
     public static final String[] RUNNING_SMALL_ENEMY_REGION_NAMES = new String[] {"ladyBug_walk1", "ladyBug_walk2"};
     public static final String[] RUNNING_LONG_ENEMY_REGION_NAMES = new String[] {"barnacle_bite1", "barnacle_bite2"};
     public static final String[] RUNNING_BIG_ENEMY_REGION_NAMES = new String[] {"spider_walk1", "spider_walk2"};
