@@ -56,7 +56,7 @@ public class Constants
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
     
     // Ammo
-    public static final int NB_SHURIKEN_NINJA_AT_START = 500;
+    public static final int NB_SHURIKEN_NINJA_AT_START = 20;
     public static final float AMMO_GRAVITY_SCALE = NINJA_GRAVITY_SCALE;
     public static final float AMMO_DENSITY = ENEMY_DENSITY;
     public static final Vector2 AMMO_LINEAR_VELOCITY = new Vector2(ENEMY_LINEAR_VELOCITY.x, 0f);
