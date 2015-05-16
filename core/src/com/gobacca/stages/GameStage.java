@@ -331,7 +331,10 @@ public class GameStage extends Stage implements ContactListener
 
     private void createEnemy()
     {
-        enemies.add(new Enemy(WorldUtils.createEnemy(world)));
+    	int[] hp = new int[1];
+    	hp[0] = 0;
+        enemies.add(new Enemy(WorldUtils.createEnemy(world, hp)));
+        enemies.get(enemies.size() - 1).setHP(hp[0]);
         addActor(enemies.get(enemies.size() - 1));
     }
     
@@ -368,12 +371,12 @@ public class GameStage extends Stage implements ContactListener
         else if(BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsShuriken(b))
         {
         	deleteShuriken(b);
-        	killEnemy(a);
+        	hitEnemy(a);
         }
         else if(BodyUtils.bodyIsShuriken(a) && BodyUtils.bodyIsEnemy(b))
         {
         	deleteShuriken(a);
-        	killEnemy(b);
+        	hitEnemy(b);
         }
         else if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsGround(b)) || (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsNinja(b)))
         {
@@ -391,14 +394,14 @@ public class GameStage extends Stage implements ContactListener
         }
     }
     
-    private void killEnemy(Body b)
+    private void hitEnemy(Body b)
     {
     	int i = 0;
     	while(i < enemies.size() && !b.equals(enemies.get(i).getBody()))
     		++i;
     	
     	if(i < enemies.size())
-    		enemies.get(i).deleteFlagON();
+    		enemies.get(i).hit();
     }
     
     private void deleteShuriken(Body b)
