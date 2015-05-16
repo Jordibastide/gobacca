@@ -104,4 +104,11 @@ public class Enemy extends GameActor
     {
     	body = null;
     }
+    
+    protected void finalize() throws Throwable
+    {
+    	animation = null;
+    	body = null;
+    	super.finalize();
+    }
 }

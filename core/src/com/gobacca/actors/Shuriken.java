@@ -78,4 +78,11 @@ public class Shuriken extends GameActor
     {
     	body = null;
     }
+    
+    protected void finalize() throws Throwable
+    {
+    	turningAnimation = null;
+    	body = null;
+    	super.finalize();
+    }
 }
