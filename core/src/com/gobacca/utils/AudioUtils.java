@@ -6,10 +6,12 @@ import com.badlogic.gdx.audio.Sound;
 
 public class AudioUtils {
 	private static AudioUtils ourInstance = new AudioUtils();
-    private static Music music;
-    private static Music music_2;
+    public static Music music;
+    public static Music music_2;
     private static Sound jumpSound;
     private static Sound hitSound;
+    private static Sound shurikenSound;
+    private static Sound shurikenhitSound;
     private static Sound gameoverSound;
     private static Sound buttonSound;
     
@@ -32,6 +34,8 @@ public class AudioUtils {
         playMusic();
         jumpSound = createSound(Constants.RUNNER_JUMPING_SOUND);
         hitSound = createSound(Constants.RUNNER_HIT_SOUND);
+        shurikenSound = createSound(Constants.SHURIKEN_SOUND);
+        shurikenhitSound = createSound(Constants.SHURIKEN_HIT_SOUND);
         gameoverSound = createSound(Constants.GAME_OVER_SOUND);
         buttonSound = createSound(Constants.BUTTON_SOUND);
     }
@@ -57,6 +61,8 @@ public class AudioUtils {
     public static void disposeSound() {
         jumpSound.dispose();
         hitSound.dispose();
+        shurikenSound.dispose();
+        shurikenhitSound.dispose();
         gameoverSound.dispose();
         buttonSound.dispose();
     }
@@ -77,6 +83,14 @@ public class AudioUtils {
 
     public Sound getHitSound() {
         return hitSound;
+    }
+    
+    public Sound getShurikenSound() {
+        return shurikenSound;
+    }
+    
+    public Sound getShurikenhitSound() {
+        return shurikenhitSound;
     }
     
     public Sound getGameoverSound() {

@@ -29,7 +29,7 @@ public class Shuriken extends GameActor
              turningFrames[i] = textureAtlas.findRegion(path);
          }
          
-         turningAnimation = new Animation(0.1f, turningFrames);
+         turningAnimation = new Animation(0.005f, turningFrames);
          stateTime = 0f;
          
          deleteFlag = false;

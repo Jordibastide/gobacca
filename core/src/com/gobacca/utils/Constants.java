@@ -113,13 +113,15 @@ public class Constants
     public static final String SCORE_BACKGROUND_IMAGE_PATH = "score.jpg";
     
     //Sounds
-    public static final String RUNNER_JUMPING_SOUND = "jump.wav";
-    public static final String RUNNER_HIT_SOUND = "hit.mp3";
-    public static final String GAME_OVER_SOUND = "gameover.mp3";
-    public static final String BUTTON_SOUND = "button.mp3";
-    public static final String GAME_MUSIC = "tropic.mp3";
-    public static final String GAME_MUSIC_2 = "epic.mp3";
+    public static final String RUNNER_JUMPING_SOUND = "sound/jump.wav";
+    public static final String RUNNER_HIT_SOUND = "sound/hit.mp3";
+    public static final String SHURIKEN_SOUND = "sound/shuriken.wav";
+    public static final String SHURIKEN_HIT_SOUND = "sound/shurikenhit.wav";
+    public static final String GAME_OVER_SOUND = "sound/gameover.mp3";
+    public static final String BUTTON_SOUND = "sound/button.mp3";
+    public static final String GAME_MUSIC = "sound/tropic.mp3";
+    public static final String GAME_MUSIC_2 = "sound/epic.mp3";
     
     //Font
-    public static final String FONT_NAME = "roboto_bold.ttf";
+    public static final String FONT_NAME = "adventure.otf";
 }

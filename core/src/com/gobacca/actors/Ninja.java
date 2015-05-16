@@ -22,13 +22,13 @@ public class Ninja extends GameActor
     private Body body;
     
     // Caracteristiques personnage
-    int nb_shuriken;
+    static int nb_shuriken;
     float pos_x;
     float pos_y;
 
     private Sound jumpSound;
     private Sound hitSound;
-    private Sound gameoverSound;
+    private Sound shurikenSound;
 
 	
     public Ninja(Body b)
@@ -50,7 +50,7 @@ public class Ninja extends GameActor
          hitTexture = textureAtlas.findRegion(Constants.NINJA_HIT_REGION_NAME);
          jumpSound = AudioUtils.getInstance().getJumpSound();
          hitSound = AudioUtils.getInstance().getHitSound();
-         gameoverSound = AudioUtils.getInstance().getGameoverSound();
+         shurikenSound = AudioUtils.getInstance().getShurikenSound();
          
          initCharacter();
     }
@@ -116,7 +116,6 @@ public class Ninja extends GameActor
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
         AudioUtils.getInstance().playSound(hitSound);
-        AudioUtils.getInstance().playSound(gameoverSound);
     }
 
     public boolean isHit()
@@ -124,7 +123,7 @@ public class Ninja extends GameActor
         return hit;
     }
     
-    public int getNbShuriken()
+    public static int getNbShuriken()
     {
     	return nb_shuriken;
     }
@@ -134,6 +133,7 @@ public class Ninja extends GameActor
     	if(nb_shuriken > 0)
     	{
     		--nb_shuriken;
+    		AudioUtils.getInstance().playSound(shurikenSound);
     	}
     }
     

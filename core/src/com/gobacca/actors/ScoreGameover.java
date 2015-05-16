@@ -8,31 +8,23 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.gobacca.utils.Constants;
 
-public class Score extends Actor {
+public class ScoreGameover extends Actor {
 
-    private static float score;
-    private int multiplier;
+    private float score;
     private Rectangle bounds;
     private BitmapFont font;
     FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.FONT_NAME));
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-    public Score(Rectangle bounds) {
+    public ScoreGameover(Rectangle bounds, int score) {
         this.bounds = bounds;
+        this.score = score;
         setWidth(bounds.width);
         setHeight(bounds.height);
-        score = 0;
-        multiplier = 10;
         parameter.size = 36;
         font = generator.generateFont(parameter);
-        font.setColor(.21f, .22f, .21f, 1f);
+        font.setColor(0f, 0f, 0f, 1f);
         generator.dispose();
-    }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        score += multiplier * delta;
     }
 
     @Override
@@ -41,15 +33,11 @@ public class Score extends Actor {
         if (getScore() == 0) {
             return;
         }
-        font.drawWrapped(batch, String.format("%d", getScore()), bounds.x, bounds.y, bounds.width, BitmapFont.HAlignment.LEFT);
+        font.drawWrapped(batch, String.format("%d points, seulement...", getScore()), bounds.x, bounds.y, bounds.width, BitmapFont.HAlignment.CENTER);
     }
 
-    public static int getScore() {
+    public int getScore() {
         return (int) Math.floor(score);
-    }
-
-    public void setMultiplier(int multiplier) {
-        this.multiplier = multiplier;
     }
     
     public void dispose() {

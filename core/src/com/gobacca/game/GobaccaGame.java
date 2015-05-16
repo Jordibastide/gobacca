@@ -1,6 +1,7 @@
 package com.gobacca.game;
 
 import com.badlogic.gdx.Game;
+import com.gobacca.actors.Enemy;
 import com.gobacca.enums.MenuType;
 import com.gobacca.screens.*;
 import com.gobacca.utils.*;
@@ -66,5 +67,6 @@ public class GobaccaGame extends Game
         super.dispose();
         AudioUtils.disposeAudio();
         AudioUtils.disposeSound();
+        Enemy.dispose();
     }
 }
