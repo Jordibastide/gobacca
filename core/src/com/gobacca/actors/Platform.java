@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.gobacca.box2d.PlatformUserData;
-import com.gobacca.utils.Constants;
 
 public class Platform extends GameActor
 {
@@ -17,7 +16,7 @@ public class Platform extends GameActor
         super(b);
         body = b;
         
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.GROUND_IMAGE_PATH)));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal(getUserData().getTextureFilePath())));
     }
 
     @Override
