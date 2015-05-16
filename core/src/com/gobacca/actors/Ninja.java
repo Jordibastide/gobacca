@@ -132,5 +132,4 @@ public class Ninja extends GameActor
     {
     	return (pos_y / 30) + (1.2f * (1 - pos_y / 120));
     }
-
 }
