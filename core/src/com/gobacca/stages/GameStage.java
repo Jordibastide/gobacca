@@ -69,9 +69,7 @@ public class GameStage extends Stage implements ContactListener
         world.setContactListener(this);
         initBackground();
         
-        //AudioUtils.getInstance().init();
         buttonSound = AudioUtils.getInstance().getButtonSound();
-        //screen.setMusicState(true);
         
         initGround();
         initNinja();
@@ -205,8 +203,8 @@ public class GameStage extends Stage implements ContactListener
         {
         	case 0:
         		AudioUtils.getInstance().playSound(buttonSound);
-        		screen.setMusicState(false);
         		AudioUtils.disposeAudio();
+        		AudioUtils.disposeSound();
         		screen.setMainMenuStage();
         	break;
         	
@@ -216,7 +214,6 @@ public class GameStage extends Stage implements ContactListener
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
-        			//AudioUtils.disposeAudio();
         		}
         		else
         		{
@@ -457,7 +454,6 @@ public class GameStage extends Stage implements ContactListener
         if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsEnemy(b)) || (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsNinja(b)))
         {
             ninja.hit();
-            AudioUtils.disposeAudio();
             screen.launchGameOver();
         }
         else if(BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsShuriken(b))

@@ -6,8 +6,8 @@ import com.badlogic.gdx.audio.Sound;
 
 public class AudioUtils {
 	private static AudioUtils ourInstance = new AudioUtils();
-    private static Music music;
-    private static Music music_2;
+    public static Music music;
+    public static Music music_2;
     private static Sound jumpSound;
     private static Sound hitSound;
     private static Sound shurikenSound;

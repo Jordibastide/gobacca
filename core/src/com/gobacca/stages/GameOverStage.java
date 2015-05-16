@@ -12,7 +12,6 @@ import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
 import com.gobacca.actors.Score;
 import com.gobacca.actors.ScoreGameover;
-import com.gobacca.actors.ScoreShuriken;
 import com.gobacca.screens.MenuScreen;
 import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
@@ -29,6 +28,7 @@ public class GameOverStage extends Stage
     private Vector3 touchPoint;
     
     private ScoreGameover scoreGameover;
+    private Sound gameoverSound;
     private Sound buttonSound;
     
     public GameOverStage(MenuScreen s)
@@ -41,10 +41,16 @@ public class GameOverStage extends Stage
         initButtons();
         initScoreGameover();
         
+        AudioUtils.getInstance();
+		AudioUtils.music.setVolume(0f);
+		AudioUtils.music_2.setVolume(0f);
+        
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
         
         buttonSound = AudioUtils.getInstance().getButtonSound();
+        gameoverSound = AudioUtils.getInstance().getGameoverSound();
+        AudioUtils.getInstance().playSound(gameoverSound);
     }
     
     private void initBackground()
@@ -91,13 +97,15 @@ public class GameOverStage extends Stage
         {
         	case 0:
         		AudioUtils.getInstance().playSound(buttonSound);
-        		//AudioUtils.disposeSound();
-        		screen.setMusicState(true);
+        		AudioUtils.music.setVolume(1f);
+        		AudioUtils.music_2.setVolume(1f);
         		screen.launchGame();
         	break;
         	
         	case 1:
         		AudioUtils.getInstance().playSound(buttonSound);
+        		AudioUtils.disposeAudio();
+        		AudioUtils.disposeSound();
         		screen.setMainMenuStage();
         	break;
         	

@@ -28,7 +28,6 @@ public class Ninja extends GameActor
     private Sound jumpSound;
     private Sound hitSound;
     private Sound shurikenSound;
-    private Sound gameoverSound;
 
 	
     public Ninja(Body body)
@@ -50,7 +49,6 @@ public class Ninja extends GameActor
          jumpSound = AudioUtils.getInstance().getJumpSound();
          hitSound = AudioUtils.getInstance().getHitSound();
          shurikenSound = AudioUtils.getInstance().getShurikenSound();
-         gameoverSound = AudioUtils.getInstance().getGameoverSound();
          
          initCharacter();
     }
@@ -116,7 +114,6 @@ public class Ninja extends GameActor
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
         AudioUtils.getInstance().playSound(hitSound);
-        AudioUtils.getInstance().playSound(gameoverSound);
     }
 
     public boolean isHit()

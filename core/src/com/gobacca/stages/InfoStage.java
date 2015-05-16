@@ -83,8 +83,8 @@ public class InfoStage extends Stage
         {
         	case 0:
         		AudioUtils.getInstance().playSound(buttonSound);
-        		screen.setMusicState(false);
         		AudioUtils.disposeAudio();
+        		AudioUtils.disposeSound();
         		screen.setMainMenuStage();
         	break;
         	
