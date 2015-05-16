@@ -1,6 +1,7 @@
 package com.gobacca.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.gobacca.actors.Background;
 import com.gobacca.actors.Button;
 import com.gobacca.screens.MenuScreen;
+import com.gobacca.utils.AudioUtils;
 import com.gobacca.utils.Constants;
 
 public class InfoStage extends Stage 
@@ -22,6 +24,8 @@ public class InfoStage extends Stage
     private Button[] buttons;
     private Vector3 touchPoint;
     
+    private Sound buttonSound;
+    
     public InfoStage(MenuScreen s)
     {
     	super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
@@ -33,6 +37,7 @@ public class InfoStage extends Stage
         
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
+        buttonSound = AudioUtils.getInstance().getButtonSound();
     }
     
     private void initBackground()
@@ -70,19 +75,26 @@ public class InfoStage extends Stage
         
         int i = 0;
         while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
+        {
         	++i;
+        }
         
         switch(i)
         {
         	case 0:
+        		AudioUtils.getInstance().playSound(buttonSound);
+        		screen.setMusicState(false);
+        		AudioUtils.disposeAudio();
         		screen.setMainMenuStage();
         	break;
         	
         	case 1:
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isMusicON())
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
+        			//AudioUtils.disposeAudio();
         		}
         		else
         		{
@@ -92,6 +104,7 @@ public class InfoStage extends Stage
         	break;
         	
         	case 2:
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isSoundON())
         		{
         			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);

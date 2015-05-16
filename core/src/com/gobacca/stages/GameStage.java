@@ -3,7 +3,11 @@ package com.gobacca.stages;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+<<<<<<< HEAD
 import com.badlogic.gdx.Input;
+=======
+import com.badlogic.gdx.audio.Sound;
+>>>>>>> sound
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -36,11 +40,18 @@ public class GameStage extends Stage implements ContactListener
     private OrthographicCamera camera;
     
     private Rectangle screenRightSide;
+<<<<<<< HEAD
     private Rectangle screenLeftSide;
+=======
+    
+    private Score score;
+>>>>>>> sound
 
     private static final int NB_BUTTONS = 3;
     private Button[] buttons;
     private Vector3 touchPoint;
+    
+    private Sound buttonSound;
 
     public GameStage(GameScreen s)
     {
@@ -54,6 +65,7 @@ public class GameStage extends Stage implements ContactListener
         initWorld();
         initCamera();
         initTouchControlAreas();
+        
     }
 
     private void initWorld()
@@ -61,16 +73,23 @@ public class GameStage extends Stage implements ContactListener
     	world = WorldUtils.createWorld();
         world.setContactListener(this);
         initBackground();
+        
+        //AudioUtils.getInstance().init();
+        buttonSound = AudioUtils.getInstance().getButtonSound();
+        //screen.setMusicState(true);
+        
         initGround();
         initNinja();
         createEnemy();
-        
         initButtons();
+        initScore();
     }
     
     private void initBackground()
     {
-        addActor(new Background());
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz3, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 50));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz2, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 150));
+        addActor(new BackgroundBACK(Constants.BACKGROUND_IMAGE_PATHz1, 0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, 250));
     }
 
     private void initGround()
@@ -111,9 +130,9 @@ public class GameStage extends Stage implements ContactListener
     {
     	buttons = new Button[NB_BUTTONS];
     	
-    	buttons[0] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX - 10), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
+    	buttons[0] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX_INGAME - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
+    	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
+    	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX_INGAME + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
         
     	if(!screen.isMusicON())
 			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
@@ -123,6 +142,12 @@ public class GameStage extends Stage implements ContactListener
 		
     	for(int i = 0; i < NB_BUTTONS; ++i)
     		addActor(buttons[i]);
+    }
+    
+    private void initScore() {
+        Rectangle scoreBounds = new Rectangle(getCamera().viewportWidth / 4, getCamera().viewportHeight - 20, getCamera().viewportWidth / 4, getCamera().viewportHeight / 8);
+        score = new Score(scoreBounds);
+        addActor(score);
     }
     
     private void initTouchControlAreas()
@@ -170,19 +195,26 @@ public class GameStage extends Stage implements ContactListener
     	
     	int i = 0;
         while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
+        {
         	++i;
+        }
         
         switch(i)
         {
         	case 0:
+        		AudioUtils.getInstance().playSound(buttonSound);
+        		screen.setMusicState(false);
+        		AudioUtils.disposeAudio();
         		screen.setMainMenuStage();
         	break;
         	
         	case 1:
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isMusicON())
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
+        			//AudioUtils.disposeAudio();
         		}
         		else
         		{
@@ -192,6 +224,7 @@ public class GameStage extends Stage implements ContactListener
         	break;
         	
         	case 2:
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isSoundON())
         		{
         			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
@@ -422,6 +455,7 @@ public class GameStage extends Stage implements ContactListener
         if((BodyUtils.bodyIsNinja(a) && BodyUtils.bodyIsEnemy(b)) || (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsNinja(b)))
         {
             ninja.hit();
+            AudioUtils.disposeAudio();
             screen.launchGameOver();
         }
         else if(BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsShuriken(b))
