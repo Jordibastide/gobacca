@@ -3,11 +3,8 @@ package com.gobacca.stages;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
-<<<<<<< HEAD
 import com.badlogic.gdx.Input;
-=======
 import com.badlogic.gdx.audio.Sound;
->>>>>>> sound
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -40,12 +37,9 @@ public class GameStage extends Stage implements ContactListener
     private OrthographicCamera camera;
     
     private Rectangle screenRightSide;
-<<<<<<< HEAD
     private Rectangle screenLeftSide;
-=======
     
     private Score score;
->>>>>>> sound
 
     private static final int NB_BUTTONS = 3;
     private Button[] buttons;
