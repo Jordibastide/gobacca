@@ -20,7 +20,7 @@ public class GameOverStage extends Stage
     
     private MenuScreen screen;
     
-    private static final int NB_BUTTONS = 4;
+    private static final int NB_BUTTONS = 2;
     private Button[] buttons;
     private Vector3 touchPoint;
     
@@ -37,6 +37,7 @@ public class GameOverStage extends Stage
         
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
+        
         buttonSound = AudioUtils.getInstance().getButtonSound();
     }
     
@@ -50,15 +51,9 @@ public class GameOverStage extends Stage
     	buttons = new Button[NB_BUTTONS];
     	
     	buttons[0] = new Button(Constants.RETRY_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH / 2) - (Constants.ICON_SIZE_PX / 2), (VIEWPORT_HEIGHT / 2) - (Constants.ICON_SIZE_PX / 2), Constants.ICON_SIZE_PX, Constants.ICON_SIZE_PX);
-    	buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
-    	buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX_INGAME + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
-    	buttons[3] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX_INGAME - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
-        
-    	if(!screen.isMusicON())
-			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
-
-		if(!screen.isSoundON())
-			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
+    	//buttons[1] = new Button(Constants.MUSIC_1_BUTTON_IMAGE_PATH, 10, (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
+    	//buttons[2] = new Button(Constants.SOUND_1_BUTTON_IMAGE_PATH, (Constants.ICON_SIZE_PX_INGAME + 20), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
+    	buttons[1] = new Button(Constants.HOME_BUTTON_IMAGE_PATH, (VIEWPORT_WIDTH - Constants.ICON_SIZE_PX_INGAME - 10), (VIEWPORT_HEIGHT - Constants.ICON_SIZE_PX_INGAME - 10), Constants.ICON_SIZE_PX_INGAME, Constants.ICON_SIZE_PX_INGAME);
 		
     	for(int i = 0; i < NB_BUTTONS; ++i)
     		addActor(buttons[i]);
@@ -84,42 +79,13 @@ public class GameOverStage extends Stage
         {
         	case 0:
         		AudioUtils.getInstance().playSound(buttonSound);
+        		//AudioUtils.disposeSound();
+        		screen.setMusicState(true);
         		screen.launchGame();
         	break;
         	
         	case 1:
         		AudioUtils.getInstance().playSound(buttonSound);
-        		if(screen.isMusicON())
-        		{
-        			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
-        			screen.setMusicState(false);
-        			AudioUtils.disposeAudio();
-        		}
-        		else
-        		{
-        			buttons[1].setTexture(Constants.MUSIC_1_BUTTON_IMAGE_PATH);
-        			screen.setMusicState(true);
-        		}
-        	break;
-        	
-        	case 2:
-        		AudioUtils.getInstance().playSound(buttonSound);
-        		if(screen.isSoundON())
-        		{
-        			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
-        			screen.setSoundState(false);
-        		}
-        		else
-        		{
-        			buttons[2].setTexture(Constants.SOUND_1_BUTTON_IMAGE_PATH);
-        			screen.setSoundState(true);
-        		}
-        	break;
-        	
-        	case 3:
-        		AudioUtils.getInstance().playSound(buttonSound);
-        		screen.setMusicState(false);
-        		AudioUtils.disposeAudio();
         		screen.setMainMenuStage();
         	break;
         	

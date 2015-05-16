@@ -94,7 +94,7 @@ public class InfoStage extends Stage
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
-        			AudioUtils.disposeAudio();
+        			//AudioUtils.disposeAudio();
         		}
         		else
         		{

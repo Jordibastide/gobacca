@@ -114,6 +114,8 @@ public class MenuScreen implements Screen
     public void hide()
     {
     	stage.dispose();
+    	//AudioUtils.disposeAudio();
+    	//AudioUtils.disposeSound();
     }
 
     @Override
@@ -133,6 +135,7 @@ public class MenuScreen implements Screen
     {
     	stage.dispose();
     	AudioUtils.disposeAudio();
+    	AudioUtils.disposeSound();
     }
 
 }

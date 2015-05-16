@@ -89,7 +89,7 @@ public class Constants
     
     //Sounds
     public static final String RUNNER_JUMPING_SOUND = "jump.wav";
-    public static final String RUNNER_HIT_SOUND = "hit.wav";
+    public static final String RUNNER_HIT_SOUND = "hit.mp3";
     public static final String GAME_OVER_SOUND = "gameover.mp3";
     public static final String BUTTON_SOUND = "button.mp3";
     public static final String GAME_MUSIC = "tropic.mp3";

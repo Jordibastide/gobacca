@@ -77,6 +77,8 @@ public class GameScreen implements Screen
     public void hide()
     {
     	stage.dispose();
+    	//AudioUtils.disposeAudio();
+    	//AudioUtils.disposeSound();
     }
 
     @Override
@@ -96,6 +98,7 @@ public class GameScreen implements Screen
     {
     	stage.dispose();
     	AudioUtils.disposeAudio();
+    	AudioUtils.disposeSound();
     }
 
 }

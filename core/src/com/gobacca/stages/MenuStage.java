@@ -41,7 +41,6 @@ public class MenuStage extends Stage
         
         touchPoint = new Vector3();
         Gdx.input.setInputProcessor(this);
-        buttonSound = AudioUtils.getInstance().getButtonSound();
     }
     
     private void initBackground()
@@ -88,8 +87,8 @@ public class MenuStage extends Stage
         {
         	case 0:
         		AudioUtils.getInstance().playSound(buttonSound);
-        		screen.setMusicState(false);
-    			AudioUtils.disposeAudio();
+        		//screen.setMusicState(false);
+    			//AudioUtils.disposeAudio();
         		screen.launchGame();
         	break;
         	
@@ -99,7 +98,7 @@ public class MenuStage extends Stage
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
-        			AudioUtils.disposeAudio();
+        			//AudioUtils.disposeAudio();
         		}
         		else
         		{

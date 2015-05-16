@@ -50,7 +50,6 @@ public class GameStage extends Stage implements ContactListener
         initCamera();
         initTouchControlAreas();
         
-        buttonSound = AudioUtils.getInstance().getButtonSound();
     }
 
     private void initWorld()
@@ -59,8 +58,9 @@ public class GameStage extends Stage implements ContactListener
         world.setContactListener(this);
         initBackground();
         
-        AudioUtils.getInstance().init();
-        screen.setMusicState(true);
+        //AudioUtils.getInstance().init();
+        buttonSound = AudioUtils.getInstance().getButtonSound();
+        //screen.setMusicState(true);
         
         initGround();
         initNinja();
@@ -161,26 +161,25 @@ public class GameStage extends Stage implements ContactListener
     	int i = 0;
         while(i < NB_BUTTONS && !buttons[i].contains(touchPoint.x, touchPoint.y))
         {
-        	
         	++i;
         }
         
         switch(i)
         {
         	case 0:
-        		buttonSound.play();
+        		AudioUtils.getInstance().playSound(buttonSound);
         		screen.setMusicState(false);
         		AudioUtils.disposeAudio();
         		screen.setMainMenuStage();
         	break;
         	
         	case 1:
-        		buttonSound.play();
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isMusicON())
         		{
         			buttons[1].setTexture(Constants.MUSIC_0_BUTTON_IMAGE_PATH);
         			screen.setMusicState(false);
-        			AudioUtils.disposeAudio();
+        			//AudioUtils.disposeAudio();
         		}
         		else
         		{
@@ -190,7 +189,7 @@ public class GameStage extends Stage implements ContactListener
         	break;
         	
         	case 2:
-        		buttonSound.play();
+        		AudioUtils.getInstance().playSound(buttonSound);
         		if(screen.isSoundON())
         		{
         			buttons[2].setTexture(Constants.SOUND_0_BUTTON_IMAGE_PATH);
