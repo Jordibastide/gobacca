@@ -60,4 +60,11 @@ public class GobaccaGame extends Game
 	{
 		super.render();
 	}
+	
+	@Override
+    public void dispose() {
+        super.dispose();
+        AudioUtils.disposeAudio();
+        AudioUtils.disposeSound();
+    }
 }
